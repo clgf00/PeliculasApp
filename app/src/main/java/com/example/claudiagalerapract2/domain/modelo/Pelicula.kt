@@ -5,7 +5,7 @@ class Pelicula (
     val anyoEstreno: Int? = null,
     val director: String? = null,
     val genero: String? = null,
-    val recomendado: Boolean = false.not(),
+    val recomendado: Boolean = false,
     val calificacion: Int = 0
 
 )
