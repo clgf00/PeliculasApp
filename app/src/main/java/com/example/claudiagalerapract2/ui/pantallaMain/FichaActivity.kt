@@ -58,7 +58,7 @@ class FichaActivity : AppCompatActivity() {
                     binding.editTextTitulo.setText(state.pelicula.titulo)
                     binding.editTextAnyoEstreno.setText(state.pelicula.anyoEstreno.toString())
                     binding.editTextDirector.setText(state.pelicula.director)
-                    binding.checkBoxRecomendado.isChecked = true
+                    binding.checkBoxRecomendado.isChecked = state.pelicula.recomendado
                     binding.seekBarCalificacion.progress = state.seekBarValue
                     when (pelicula.genero) {
                         "accion" -> binding.radioGroupGenero.check(R.id.radioAction)
