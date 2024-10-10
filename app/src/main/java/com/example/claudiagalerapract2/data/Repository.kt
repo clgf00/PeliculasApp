@@ -11,9 +11,10 @@ class Repository {
     }
 
     init{
-        peliculas.add(Pelicula("El Gran Escape", 1998, "Juan Perez", "Accion", false, 4))
-        peliculas.add(Pelicula("Viaje al Futuro", 2002, "Maria Lopez", "terror", true, 8 ))
-        peliculas.add(Pelicula("La Batalla Final", 2013, "Jose Rodriguez", "Aventuras", true, 7))
+       // peliculas.add(Pelicula("", null, " ", "", false, 0))
+        peliculas.add(Pelicula("El Gran Escape", 1998, "Juan Perez", "accion", false, 5))
+        peliculas.add(Pelicula("Viaje al Futuro", 2002, "Maria Lopez", "terror", true, 3 ))
+        peliculas.add(Pelicula("La Batalla Final", 2013, "Jose Rodriguez", "comedia", true, 5))
 
     }
 

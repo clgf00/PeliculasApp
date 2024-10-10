@@ -7,12 +7,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.claudiagalerapract2.R
 import com.example.claudiagalerapract2.domain.modelo.Pelicula
 import com.example.claudiagalerapract2.domain.usecases.peliculas.AddPeliculaUseCase
+import com.example.claudiagalerapract2.domain.usecases.peliculas.DeletePeliculaUseCase
 import com.example.claudiagalerapract2.domain.usecases.peliculas.GetPeliculas
+import com.example.claudiagalerapract2.domain.usecases.peliculas.UpdatePeliculaUseCase
 import com.example.claudiagalerapract2.utils.StringProvider
 
 class FichaViewModel(
     private val StringProvider: StringProvider,
     private val addPeliculaUseCase: AddPeliculaUseCase,
+    private val deletePeliculaUseCase: DeletePeliculaUseCase,
+    private val updatePeliculaUseCase: UpdatePeliculaUseCase,
     private val getPeliculas: GetPeliculas,
 ) : ViewModel() {
 
@@ -22,8 +26,10 @@ class FichaViewModel(
 
     init {
         val peliculas = getPeliculas.invoke()
-        _uiState.value = FichaState(pelicula = peliculas[indice],
-            seekBarValue = peliculas[indice].calificacion)
+        _uiState.value = FichaState(
+            pelicula = peliculas[indice],
+            seekBarValue = peliculas[indice].calificacion
+        )
     }
 
     fun addPelicula(pelicula: Pelicula) {
@@ -42,27 +48,6 @@ class FichaViewModel(
         }
     }
 
-    fun getPeliculas(id: Int) {
-        val peliculas = getPeliculas.invoke()
-        if (id >= peliculas.size || id < 0) {
-            //si los ids van en orden, 1, 2, 3, 4..., entonces si se introduce un 5
-            //debe dar error
-            //esta linea revisa el valor del uiState, que es una instancia de MutableLiveData,
-            //lo cual es un tipo de objeto observable que puede contener un valor
-            // y notificar a los observadores cuando ese valor cambia.
-            _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
-        } else
-            _uiState.value = _uiState.value?.copy(
-                pelicula = peliculas[id],
-                habilitarSiguiente = id < peliculas.size - 1,
-            )
-        //si el id es válido y no es null (?) y hay un id en la posición de la lista peliculas.size
-        //se actualiza el estado de la interfaz del usuario y muestra la pelicula en cuestion.
-    }
-
-    fun getAllPeliculas(): List<String> {
-        return getPeliculas().map { pelicula -> pelicula.titulo };
-    }
 
     fun errorMostrado() {
         _uiState.value = _uiState.value?.copy(error = null)
@@ -70,10 +55,33 @@ class FichaViewModel(
 
     fun siguiente() {
         if (indice < getPeliculas().size - 1) {
-            indice++;
+            indice++
             _uiState.value = _uiState.value?.copy(
                 pelicula = getPeliculas()[indice],
-                habilitarSiguiente = indice < getPeliculas().size - 1
+                habilitarSiguiente = indice < getPeliculas().size
+            )
+        }
+    }
+
+    fun deletePelicula() {
+        if (deletePeliculaUseCase(indice)) {
+            anterior()
+
+        } else {
+            _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
+        }
+    }
+
+    fun updatePelicula(pelicula: Any) {
+
+    }
+
+    fun anterior() {
+        if (indice < getPeliculas().size - 1 && indice > 0) {
+            indice--;
+            _uiState.value = _uiState.value?.copy(
+                pelicula = getPeliculas()[indice],
+                habilitaAnterior = indice < getPeliculas().size - 1 && indice > 0
             )
         }
     }
@@ -82,6 +90,8 @@ class FichaViewModel(
 class MainViewModelFactory(
     private val stringProvider: StringProvider,
     private val addPelicula: AddPeliculaUseCase,
+    private val deletePeliculaUseCase: DeletePeliculaUseCase,
+    private val updatePeliculaUseCase: UpdatePeliculaUseCase,
     private val getPeliculas: GetPeliculas,
 
     ) : ViewModelProvider.Factory {
@@ -91,6 +101,8 @@ class MainViewModelFactory(
             return FichaViewModel(
                 stringProvider,
                 addPelicula,
+                deletePeliculaUseCase,
+                updatePeliculaUseCase,
                 getPeliculas,
             ) as T
         }
