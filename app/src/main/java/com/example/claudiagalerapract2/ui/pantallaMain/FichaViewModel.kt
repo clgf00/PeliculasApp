@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.claudiagalerapract2.R
 import com.example.claudiagalerapract2.domain.modelo.Pelicula
 import com.example.claudiagalerapract2.domain.usecases.peliculas.AddPeliculaUseCase
 import com.example.claudiagalerapract2.domain.usecases.peliculas.DeletePeliculaUseCase
@@ -37,18 +36,16 @@ class FichaViewModel(
     }
 
     fun addPelicula(pelicula: Pelicula) {
-        //La función verifica si el resultado de addPersonaUseCase(persona) es falso
-        // (lo que indica que no se pudo agregar la persona)
-        //TODO: Cuando esté cambiando el valor del genero, seleccionar el RadioButton del RadioGroup, no cambiar el texto del RadioGroup
-        if (!addPeliculaUseCase(pelicula)) {
-            _uiState.value = FichaState(
-                pelicula = uiState.value.let { pelicula },
-                error = StringProvider.getString(R.string.pelicula)
+        if (pelicula.titulo.isNotEmpty() && pelicula.anyoEstreno != 0 && pelicula.genero?.isNotEmpty() == true) {
+            addPeliculaUseCase(pelicula)
+            _uiState.value = _uiState.value?.copy(
+                pelicula = Pelicula("", 0, "", "", false, 0), // Restablecer la película vacía
+                seekBarValue = 0, //
+                habilitarSiguiente = false,
+                habilitarAnterior = getPeliculas().isNotEmpty()
             )
         } else {
             _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
-            //Si el valor de _uiState no es null, se crea una nueva instancia de MainState
-            // utilizando el contenido actual pero reemplazando el error con Constantes.ERROR.
         }
     }
 
@@ -70,14 +67,18 @@ class FichaViewModel(
 
     fun deletePelicula() {
         if (deletePeliculaUseCase(indice)) {
-            anterior()
-
+            if(indice==0){
+                siguiente()
+            }else{
+                anterior()
+            }
         } else {
             _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
         }
     }
 
     fun updatePelicula(pelicula: Any) {
+
 
     }
 
@@ -88,12 +89,12 @@ class FichaViewModel(
         }
     }
 
-
     private fun actualizarPelicula() {
         _uiState.value = _uiState.value?.copy(pelicula = getPeliculas()[indice])
         _uiState.value = _uiState.value?.copy(
+            pelicula = getPeliculas()[indice],
             seekBarValue = getPeliculas()[indice].calificacion,
-            habilitaAnterior = indice > 0,
+            habilitarAnterior = indice > 0,
             habilitarSiguiente = indice < getPeliculas().size - 1
         )
     }

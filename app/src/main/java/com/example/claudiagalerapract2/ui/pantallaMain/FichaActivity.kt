@@ -66,9 +66,17 @@ class FichaActivity : AppCompatActivity() {
     private fun setEvents() {
         with(binding) {
             buttonAdd.setOnClickListener {
-                val pelicula = Pelicula()
+                val pelicula = Pelicula(
+                    titulo = binding.editTextTitulo.text.toString(),
+                    anyoEstreno = binding.editTextAnyoEstreno.text.toString().toInt(),
+                    director = binding.editTextDirector.text.toString(),
+                    genero = binding.radioGroupGenero.checkedRadioButtonId.toString(),
+                    recomendado = binding.checkBoxRecomendado.isChecked,
+                    calificacion = binding.seekBarCalificacion.progress
+                )
                 viewModel.addPelicula(pelicula)
             }
+
             buttonDelete.setOnClickListener {
                 viewModel.deletePelicula()
             }
@@ -89,8 +97,6 @@ class FichaActivity : AppCompatActivity() {
 
             buttonSiguiente.setOnClickListener {
                 viewModel.siguiente()
-                //TODO hacer la logica para que al pulsar el boton muestre las peliculas de la lista
-                // Hacer la logica en el FichaViewModel, no en el Activity
             }
         }
     }
@@ -103,11 +109,11 @@ class FichaActivity : AppCompatActivity() {
             binding.checkBoxRecomendado.isChecked = state.pelicula.recomendado
             binding.seekBarCalificacion.progress = state.seekBarValue
             when (pelicula.genero) {
-                "accion"    -> binding.radioGroupGenero.check(R.id.radioAction)
-                "drama"     -> binding.radioGroupGenero.check(R.id.radioDrama)
-                "comedia"   -> binding.radioGroupGenero.check(R.id.radioComedia)
-                "terror"    -> binding.radioGroupGenero.check(R.id.radioTerror)
-                "fantasia"  -> binding.radioGroupGenero.check(R.id.radioFantasia)
+                "accion" -> binding.radioGroupGenero.check(R.id.radioAction)
+                "drama" -> binding.radioGroupGenero.check(R.id.radioDrama)
+                "comedia" -> binding.radioGroupGenero.check(R.id.radioComedia)
+                "terror" -> binding.radioGroupGenero.check(R.id.radioTerror)
+                "fantasia" -> binding.radioGroupGenero.check(R.id.radioFantasia)
                 else -> {
                     binding.radioGroupGenero.clearCheck()
                 }
