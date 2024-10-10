@@ -25,11 +25,15 @@ class FichaViewModel(
     val uiState: LiveData<FichaState> get() = _uiState
 
     init {
+        addPeliculaUseCase.invoke(Pelicula("", 0, "", "", false, 0))
         val peliculas = getPeliculas.invoke()
         _uiState.value = FichaState(
             pelicula = peliculas[indice],
-            seekBarValue = peliculas[indice].calificacion
+            seekBarValue = peliculas[indice].calificacion,
+            habilitarSiguiente = peliculas.size > 1
+
         )
+
     }
 
     fun addPelicula(pelicula: Pelicula) {
@@ -58,6 +62,7 @@ class FichaViewModel(
             indice++
             _uiState.value = _uiState.value?.copy(
                 pelicula = getPeliculas()[indice],
+                seekBarValue = getPeliculas()[indice].calificacion,
                 habilitarSiguiente = indice < getPeliculas().size
             )
         }
@@ -77,35 +82,42 @@ class FichaViewModel(
     }
 
     fun anterior() {
-        if (indice < getPeliculas().size - 1 && indice > 0) {
-            indice--;
-            _uiState.value = _uiState.value?.copy(
-                pelicula = getPeliculas()[indice],
-                habilitaAnterior = indice < getPeliculas().size - 1 && indice > 0
-            )
+        if (indice > 0) {
+            indice--
+            actualizarPelicula()
         }
     }
-}
 
-class MainViewModelFactory(
-    private val stringProvider: StringProvider,
-    private val addPelicula: AddPeliculaUseCase,
-    private val deletePeliculaUseCase: DeletePeliculaUseCase,
-    private val updatePeliculaUseCase: UpdatePeliculaUseCase,
-    private val getPeliculas: GetPeliculas,
 
-    ) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FichaViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return FichaViewModel(
-                stringProvider,
-                addPelicula,
-                deletePeliculaUseCase,
-                updatePeliculaUseCase,
-                getPeliculas,
-            ) as T
+    private fun actualizarPelicula() {
+        _uiState.value = _uiState.value?.copy(pelicula = getPeliculas()[indice])
+        _uiState.value = _uiState.value?.copy(
+            seekBarValue = getPeliculas()[indice].calificacion,
+            habilitaAnterior = indice > 0,
+            habilitarSiguiente = indice < getPeliculas().size - 1
+        )
+    }
+
+    class MainViewModelFactory(
+        private val stringProvider: StringProvider,
+        private val addPelicula: AddPeliculaUseCase,
+        private val deletePeliculaUseCase: DeletePeliculaUseCase,
+        private val updatePeliculaUseCase: UpdatePeliculaUseCase,
+        private val getPeliculas: GetPeliculas,
+
+        ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(FichaViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return FichaViewModel(
+                    stringProvider,
+                    addPelicula,
+                    deletePeliculaUseCase,
+                    updatePeliculaUseCase,
+                    getPeliculas,
+                ) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

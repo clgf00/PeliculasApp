@@ -22,12 +22,12 @@ class FichaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val viewModel: FichaViewModel by viewModels {
-        MainViewModelFactory(
+        FichaViewModel.MainViewModelFactory(
             StringProvider.instance(this),
             AddPeliculaUseCase(),
             DeletePeliculaUseCase(),
             UpdatePeliculaUseCase(),
-            GetPeliculas(Repository()),
+            GetPeliculas(),
         )
     }
 
