@@ -1,183 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".ui.pantallaMain.FichaActivity">
+    tools:context=".ui.pantallamain.MainActivity">
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listaPeliculas"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pelicula"
-        android:textSize="24sp"
-        android:textStyle="bold"
+
+        app:layout_constraintBottom_toTopOf="@id/fab"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTitulo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/titulo"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
-
-    <EditText
-        android:id="@+id/editTextDirector"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/director"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextTitulo" />
-
-    <EditText
-        android:id="@+id/editTextAnyoEstreno"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/anyo_de_estreno"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextDirector" />
-
-    <TextView
-        android:id="@+id/generoTextView"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/genero"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextAnyoEstreno" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupGenero"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/generoTextView">
-
-        <RadioButton
-            android:id="@+id/radioAction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/accion" />
-
-        <RadioButton
-            android:id="@+id/radioDrama"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/drama" />
-
-        <RadioButton
-            android:id="@+id/radioComedia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/comedia" />
-
-        <RadioButton
-            android:id="@+id/radioTerror"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/terror" />
-
-        <RadioButton
-            android:id="@+id/radioFantasia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fantasia" />
-    </RadioGroup>
-
-    <CheckBox
-        android:id="@+id/checkBoxRecomendado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/recomendado"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupGenero" />
-
-    <SeekBar
-        android:id="@+id/seekBarCalificacion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:max="5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBoxRecomendado" />
-
-    <TextView
-        android:id="@+id/textViewCalificacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/calificacion_0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/seekBarCalificacion" />
-
-    <Button
-        android:id="@+id/buttonAnterior"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/anterior"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/ir"
+        android:src="@drawable/add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonAdd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
-
-    <Button
-        android:id="@+id/buttonAdd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/agregar"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonAnterior"
-        app:layout_constraintEnd_toStartOf="@id/buttonUpdate"
-        app:layout_constraintStart_toEndOf="@+id/buttonAnterior" />
-
-    <Button
-        android:id="@+id/buttonUpdate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/actualizar"
-        app:layout_constraintBottom_toBottomOf="@id/buttonAdd"
-        app:layout_constraintStart_toEndOf="@+id/buttonAdd"
-        app:layout_constraintEnd_toStartOf="@id/buttonDelete"
-        app:layout_constraintTop_toTopOf="@+id/buttonAdd" />
-
-    <Button
-        android:id="@+id/buttonDelete"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/eliminar"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonUpdate"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSiguiente"
-        app:layout_constraintStart_toEndOf="@+id/buttonUpdate"
-        app:layout_constraintTop_toTopOf="@+id/buttonUpdate" />
-
-    <Button
-        android:id="@+id/buttonSiguiente"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/siguiente"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonDelete"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
-
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-

@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">FirstApp</string>
+    <string name="app_name">ClaudiaGaleraViewModel</string>
+    <string name="descripcion_slider_calificacion">Calificación</string>
     <string name="director">Director</string>
     <string name="nombre">Nombre</string>
     <string name="right">◄</string>
@@ -25,4 +26,7 @@
     <string name="siguiente">⮕</string>
     <string name="anterior">⬅</string>
     <string name="año_de_estreno">Año de estreno</string>
+    <string name="agregar2">Agregar</string>
+    <string name="ir">IR</string>
+    <string name="titulo2">Titulo</string>
 </resources>

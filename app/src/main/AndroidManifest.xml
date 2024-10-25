@@ -13,13 +13,17 @@
         android:theme="@style/Theme.FirstApp"
         tools:targetApi="31">
         <activity
-            android:name=".ui.pantallaMain.FichaActivity"
+            android:name=".ui.pantallamain.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.pantalladetalle.DetalleActivity"
+            android:exported="true">
         </activity>
     </application>
 
