@@ -1,13 +1,20 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.navigation.safeargs.kotlin)
 }
 
 android {
     namespace = "com.example.claudiagalerapract2"
-    compileSdk = 34
+    compileSdk = 35
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+
     }
     defaultConfig {
         applicationId = "com.example.claudiagalerapract2"
@@ -38,7 +45,7 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.timber)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -57,4 +64,21 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    //hilt
+    implementation(libs.hilt.core)
+    ksp(libs.hilt.compiler)
+
+    //Logs
+    implementation(libs.timber)
+
+    //Librerias del viewmodel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    //Fragments
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
 }

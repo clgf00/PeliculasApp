@@ -1,4 +1,5 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/detalle"
@@ -7,7 +8,7 @@
     android:padding="16dp"
     tools:context=".ui.pantalladetalle.DetalleActivity">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,47 +18,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTitulo"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextTituloLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="@string/titulo"
-        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@id/titleTextView">
 
-    <EditText
-        android:id="@+id/editTextDirector"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextDirectorLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="@string/director"
-        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextTitulo" />
+        app:layout_constraintTop_toBottomOf="@id/editTextTituloLayout">
 
-    <EditText
-        android:id="@+id/editTextAnyoEstreno"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextDirector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextAnyoEstrenoLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="@string/anyo_de_estreno"
-        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextDirector" />
+        app:layout_constraintTop_toBottomOf="@id/editTextDirectorLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextAnyoEstreno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/generoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/genero"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextAnyoEstreno" />
+        app:layout_constraintTop_toBottomOf="@id/editTextAnyoEstrenoLayout"/>
 
     <RadioGroup
         android:id="@+id/radioGroupGenero"
@@ -127,8 +149,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/calificacion_0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/seekBarCalificacion" />
-
+        app:layout_constraintTop_toBottomOf="@id/seekBarCalificacion"
+        app:layout_constraintBottom_toTopOf="@id/buttonAdd" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonAdd"
@@ -161,6 +183,6 @@
         app:layout_constraintStart_toEndOf="@+id/buttonUpdate"
         app:layout_constraintTop_toTopOf="@+id/buttonUpdate" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 

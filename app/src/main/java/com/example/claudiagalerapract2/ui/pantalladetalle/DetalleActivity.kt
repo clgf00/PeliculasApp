@@ -16,24 +16,22 @@ import com.example.claudiagalerapract2.domain.usecases.peliculas.AddPeliculaUseC
 import com.example.claudiagalerapract2.domain.usecases.peliculas.DeletePeliculaUseCase
 import com.example.claudiagalerapract2.domain.usecases.peliculas.GetPeliculas
 import com.example.claudiagalerapract2.domain.usecases.peliculas.UpdatePeliculaUseCase
+import com.example.claudiagalerapract2.ui.common.Constantes
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetalleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetalleBinding
     private var id: Int = 0
-    private val viewModel: DetalleViewModel by viewModels {
-        DetalleViewModel.MainViewModelFactory(
-            AddPeliculaUseCase(),
-            DeletePeliculaUseCase(),
-            UpdatePeliculaUseCase(),
-            GetPeliculas(),
-        )
-    }
+
+    private val viewModel: DetalleViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_detalle)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.detalle)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -43,7 +41,8 @@ class DetalleActivity : AppCompatActivity() {
         binding = ActivityDetalleBinding.inflate(layoutInflater).apply {
             setContentView(root)
         }
-        id = intent.getIntExtra("id", 0)
+
+        id = intent.getIntExtra(Constantes.ID, 0)
         val nuevo = intent.getBooleanExtra("nuevo", false)
         if (nuevo) {
             binding.buttonAdd.visibility = View.VISIBLE
@@ -60,7 +59,6 @@ class DetalleActivity : AppCompatActivity() {
         if (!nuevo) {
             viewModel.cambiarPelicula(id)
         }
-
     }
 
     private fun observarViewModel() {
@@ -88,7 +86,6 @@ class DetalleActivity : AppCompatActivity() {
 
     private fun setEvents() {
         with(binding) {
-
             fun createPelicula(): Pelicula {
                 return Pelicula(
                     id = id,
@@ -127,11 +124,11 @@ class DetalleActivity : AppCompatActivity() {
             binding.checkBoxRecomendado.isChecked = state.pelicula.recomendado
             binding.seekBarCalificacion.value = pelicula.calificacion.toFloat()
             when ((pelicula.genero?.let { removeAccents(it.lowercase()) })) {
-                "accion" -> binding.radioGroupGenero.check(R.id.radioAction)
-                "drama" -> binding.radioGroupGenero.check(R.id.radioDrama)
-                "comedia" -> binding.radioGroupGenero.check(R.id.radioComedia)
-                "terror" -> binding.radioGroupGenero.check(R.id.radioTerror)
-                "fantasia" -> binding.radioGroupGenero.check(R.id.radioFantasia)
+                Constantes.ACCION -> binding.radioGroupGenero.check(R.id.radioAction)
+                Constantes.DRAMA -> binding.radioGroupGenero.check(R.id.radioDrama)
+                Constantes.COMEDIA -> binding.radioGroupGenero.check(R.id.radioComedia)
+                Constantes.TERROR -> binding.radioGroupGenero.check(R.id.radioTerror)
+                Constantes.FANTASIA -> binding.radioGroupGenero.check(R.id.radioFantasia)
                 else -> {
                     binding.radioGroupGenero.clearCheck()
                 }

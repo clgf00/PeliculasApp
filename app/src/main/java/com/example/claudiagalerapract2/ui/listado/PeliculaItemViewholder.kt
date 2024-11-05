@@ -1,4 +1,4 @@
-package com.example.claudiagalerapract2.ui.pantallamain
+package com.example.claudiagalerapract2.ui.listado
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

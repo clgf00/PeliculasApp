@@ -1,10 +1,10 @@
 package com.example.claudiagalerapract2.domain.usecases.peliculas
 
-import com.example.claudiagalerapract2.data.RepositoryDos
-import com.example.claudiagalerapract2.domain.modelo.Pelicula
+import com.example.claudiagalerapract2.data.Repository
+import javax.inject.Inject
 
-class DeletePeliculaUseCase {
-    operator fun invoke(index: Int): Boolean{
-        return RepositoryDos.deletePelicula(index)
+class DeletePeliculaUseCase @Inject constructor(private val repository: Repository) {
+    operator fun invoke(index: Int): Boolean {
+        return repository.deletePelicula(index)
     }
 }

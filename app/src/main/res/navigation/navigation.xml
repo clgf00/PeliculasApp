@@ -1,0 +1,31 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/listadoFragment">
+
+    <fragment
+        android:id="@+id/listadoFragment"
+        android:name="com.example.claudiagalerapract2.ui.listado.ListadoFragment"
+        android:label="Listado de Películas"
+        tools:layout="@layout/fragment_listado_peliculas">
+
+        <action
+            android:id="@+id/action_listadoFragment_to_detalleFragment"
+            app:destination="@id/detalleFragment">
+            <argument
+                android:name="peliculaId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleFragment"
+        android:name="com.example.claudiagalerapract2.ui.listado.DetalleFragment"
+        android:label="Detalle de Película"
+        tools:layout="@layout/fragment_detalle">
+        <argument
+            android:name="peliculaId"
+            app:argType="integer" />
+    </fragment>
+</navigation>

@@ -1,10 +1,9 @@
 package com.example.claudiagalerapract2.domain.usecases.peliculas
 
-import com.example.claudiagalerapract2.data.RepositoryDos
+import com.example.claudiagalerapract2.data.Repository
+import javax.inject.Inject
 
-class GetPeliculas {
-    operator fun invoke() = RepositoryDos.getPeliculas()
-
+class GetPeliculas @Inject constructor(private val repository: Repository) {
+    operator fun invoke() = repository.getPeliculas()
 }
-
 

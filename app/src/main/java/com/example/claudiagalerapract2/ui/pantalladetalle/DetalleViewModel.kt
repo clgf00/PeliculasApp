@@ -3,15 +3,17 @@ package com.example.claudiagalerapract2.ui.pantalladetalle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.claudiagalerapract2.domain.modelo.Pelicula
 import com.example.claudiagalerapract2.domain.usecases.peliculas.AddPeliculaUseCase
 import com.example.claudiagalerapract2.domain.usecases.peliculas.DeletePeliculaUseCase
 import com.example.claudiagalerapract2.domain.usecases.peliculas.GetPeliculas
 import com.example.claudiagalerapract2.domain.usecases.peliculas.UpdatePeliculaUseCase
 import com.example.claudiagalerapract2.ui.Constantes
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetalleViewModel(
+@HiltViewModel
+class DetalleViewModel @Inject constructor(
     private val addPeliculaUseCase: AddPeliculaUseCase,
     private val deletePeliculaUseCase: DeletePeliculaUseCase,
     private val updatePeliculaUseCase: UpdatePeliculaUseCase,
@@ -87,26 +89,5 @@ class DetalleViewModel(
             habilitarAnterior = indice > 0,
             habilitarSiguiente = indice < peliculas.size - 1
         )
-    }
-
-    class MainViewModelFactory(
-        private val addPelicula: AddPeliculaUseCase,
-        private val deletePeliculaUseCase: DeletePeliculaUseCase,
-        private val updatePeliculaUseCase: UpdatePeliculaUseCase,
-        private val getPeliculas: GetPeliculas,
-
-        ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(DetalleViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return DetalleViewModel(
-                    addPelicula,
-                    deletePeliculaUseCase,
-                    updatePeliculaUseCase,
-                    getPeliculas,
-                ) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
     }
 }

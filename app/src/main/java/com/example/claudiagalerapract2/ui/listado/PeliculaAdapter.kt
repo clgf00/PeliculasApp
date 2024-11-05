@@ -1,4 +1,4 @@
-package com.example.claudiagalerapract2.ui.pantallamain
+package com.example.claudiagalerapract2.ui.listado
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,6 @@ import com.example.claudiagalerapract2.domain.modelo.Pelicula
 
 
 class PeliculaAdapter(
-    val itemClick: (Pelicula) -> Unit,
     val actions: PeliculasActions
 ) : ListAdapter<Pelicula, PeliculaItemViewholder>(DiffCallback()) {
 
