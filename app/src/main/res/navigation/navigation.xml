@@ -27,5 +27,8 @@
         <argument
             android:name="peliculaId"
             app:argType="integer" />
+        <argument
+            android:name="nuevo"
+            app:argType="boolean" />
     </fragment>
 </navigation>

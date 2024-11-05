@@ -12,10 +12,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.claudiagalerapract2.R
 import com.example.claudiagalerapract2.databinding.ActivityDetalleBinding
 import com.example.claudiagalerapract2.domain.modelo.Pelicula
-import com.example.claudiagalerapract2.domain.usecases.peliculas.AddPeliculaUseCase
-import com.example.claudiagalerapract2.domain.usecases.peliculas.DeletePeliculaUseCase
-import com.example.claudiagalerapract2.domain.usecases.peliculas.GetPeliculas
-import com.example.claudiagalerapract2.domain.usecases.peliculas.UpdatePeliculaUseCase
 import com.example.claudiagalerapract2.ui.common.Constantes
 import dagger.hilt.android.AndroidEntryPoint
 

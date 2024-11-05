@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -53,11 +52,13 @@ class ListadoFragment : Fragment() {
         adapter = PeliculaAdapter(
             actions = object : PeliculaAdapter.PeliculasActions {
                 override fun onItemClick(pelicula: Pelicula) {
+                    val action = ListadoFragmentDirections.actionListadoFragmentToDetalleFragment(pelicula.id, false)
+                    findNavController().navigate(action)
+
                 }
             })
 
         binding.listaPeliculas.layoutManager = LinearLayoutManager(activity)
-
         binding.listaPeliculas.adapter = adapter
 
     }
