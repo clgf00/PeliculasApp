@@ -8,25 +8,25 @@
         android:id="@+id/listadoFragment"
         android:name="com.example.claudiagalerapract2.ui.listado.ListadoFragment"
         android:label="Listado de Películas"
-        tools:layout="@layout/fragment_listado_peliculas">
+        tools:layout="@layout/fragment_listado">
 
         <action
             android:id="@+id/action_listadoFragment_to_detalleFragment"
             app:destination="@id/detalleFragment">
             <argument
-                android:name="peliculaId"
-                app:argType="integer" />
+                android:name="heroId"
+                app:argType="string" />
         </action>
     </fragment>
 
     <fragment
         android:id="@+id/detalleFragment"
         android:name="com.example.claudiagalerapract2.ui.listado.DetalleFragment"
-        android:label="Detalle de Película"
+        android:label="Detalle de Heroe"
         tools:layout="@layout/fragment_detalle">
         <argument
-            android:name="peliculaId"
-            app:argType="integer" />
+            android:name="heroId"
+            app:argType="string" />
         <argument
             android:name="nuevo"
             app:argType="boolean" />

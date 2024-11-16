@@ -3,19 +3,17 @@ package com.example.claudiagalerapract2.ui.listado
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.claudiagalerapract2.databinding.CardViewBinding
-import com.example.claudiagalerapract2.domain.modelo.Pelicula
+import com.example.claudiagalerapract2.domain.modelo.Hero
 
 
-class PeliculaItemViewholder(itemView: View, val actions: PeliculaAdapter.PeliculasActions) :
+class HeroItemViewHolder(itemView: View, val actions: HeroAdapter.HeroesActions) :
     RecyclerView.ViewHolder(itemView) {
 
     private val binding = CardViewBinding.bind(itemView)
 
-    fun bind(item: Pelicula) {
+    fun bind(item: Hero) {
         with(binding) {
-            titulo.text = item.titulo
-            director.text = item.director
-            anyo.text = item.anyoEstreno.toString()
+            name.text = item.name
             itemView.setBackgroundResource(android.R.color.white)
             itemView.setOnLongClickListener {
                 true

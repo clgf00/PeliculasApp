@@ -20,21 +20,21 @@
             app:layout_constraintGuide_percent="0.25" />
 
         <TextView
-            android:id="@+id/titulo"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:textColor="@color/md_theme_onPrimaryFixed_mediumContrast"
             android:textSize="35sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/director"
+            app:layout_constraintBottom_toTopOf="@+id/location"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Histidine" />
 
 
         <TextView
-            android:id="@+id/director"
+            android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -43,19 +43,19 @@
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/titulo"
+            app:layout_constraintTop_toBottomOf="@+id/name"
             tools:text="His" />
 
         <TextView
-            android:id="@+id/anyo"
+            android:id="@+id/age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:textColor="@color/md_theme_onPrimaryFixed_mediumContrast"
 
             android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/director"
-            app:layout_constraintStart_toEndOf="@+id/director"
+            app:layout_constraintBottom_toBottomOf="@+id/location"
+            app:layout_constraintStart_toEndOf="@+id/location"
             tools:text="H" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

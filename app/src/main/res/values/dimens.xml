@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="_0dp">0dp</dimen>
+
+    <dimen name="padding_general">16dp</dimen>
+    <dimen name="margin_top">8dp</dimen>
+    <dimen name="margin_bottom">8dp</dimen>
+    <dimen name="margin_left_right">16dp</dimen>
+    <dimen name="margin_between_elements">12dp</dimen>
+    <dimen name="margin_medium">12dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="text_size_title">20sp</dimen>
+    <dimen name="text_size_label">14sp</dimen>
+    <dimen name="text_size_input">14sp</dimen>
+    <dimen name="min_height_input">48dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_margin_top">12dp</dimen>
+    <dimen name="button_margin_bottom">12dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="recyclerView_height">0dp</dimen>
+    <dimen name="slider_margin_top">16dp</dimen>
+    <dimen name="slider_height">40dp</dimen>
+
 </resources>
+

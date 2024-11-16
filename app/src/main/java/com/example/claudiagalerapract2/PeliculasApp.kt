@@ -8,7 +8,6 @@ import timber.log.Timber
 @HiltAndroidApp
 class PeliculasApp : Application() {
 
-
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())

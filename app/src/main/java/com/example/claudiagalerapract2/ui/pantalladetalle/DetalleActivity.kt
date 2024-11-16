@@ -1,24 +1,23 @@
 package com.example.claudiagalerapract2.ui.pantalladetalle
-
+//F
 import android.os.Bundle
-import android.view.View
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import coil.load
 import com.example.claudiagalerapract2.R
 import com.example.claudiagalerapract2.databinding.ActivityDetalleBinding
-import com.example.claudiagalerapract2.domain.modelo.Pelicula
+import com.example.claudiagalerapract2.domain.modelo.Hero
 import com.example.claudiagalerapract2.ui.common.Constantes
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetalleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetalleBinding
-    private var id: Int = 0
+    private var key: Int = 0
 
     private val viewModel: DetalleViewModel by viewModels()
 
@@ -26,34 +25,29 @@ class DetalleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_detalle)
+        binding = ActivityDetalleBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.detalle)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.detalleFragment)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         binding = ActivityDetalleBinding.inflate(layoutInflater).apply {
             setContentView(root)
         }
 
-        id = intent.getIntExtra(Constantes.ID, 0)
+        key = intent.getIntExtra(Constantes.KEY, 0)
         val nuevo = intent.getBooleanExtra("nuevo", false)
-        if (nuevo) {
-            binding.buttonAdd.visibility = View.VISIBLE
-            binding.buttonUpdate.visibility = View.GONE
-            binding.buttonDelete.visibility = View.GONE
-        } else {
-            binding.buttonAdd.visibility = View.GONE
-            binding.buttonUpdate.visibility = View.VISIBLE
-            binding.buttonDelete.visibility = View.VISIBLE
-            viewModel.cambiarPelicula(id)
-        }
-        setEvents()
         observarViewModel()
         if (!nuevo) {
-            viewModel.cambiarPelicula(id)
+            viewModel.cambiarHeroe(key.toString())
+        }
+    }
+
+    private fun setHeroImage(hero: Hero) {
+        binding.imageHero.load(hero.portrait)  {
+            crossfade(true)
         }
     }
 
@@ -63,70 +57,26 @@ class DetalleActivity : AppCompatActivity() {
                 Toast.makeText(this@DetalleActivity, error, Toast.LENGTH_SHORT).show()
                 viewModel.errorMostrado()
             }
-            state.mensaje?.let {
-                Toast.makeText(this@DetalleActivity, it, Toast.LENGTH_SHORT).show()
-                viewModel.anyadidoMostrado()
-            }
-            state.mensaje?.let {
-                Toast.makeText(this@DetalleActivity, it, Toast.LENGTH_SHORT).show()
-                viewModel.eliminadoMostrado()
-            }
-            state.mensaje?.let {
-                Toast.makeText(this@DetalleActivity, it, Toast.LENGTH_SHORT).show()
-                viewModel.updateMostrado()
+            if (state.hero != null) {
+                setHeroImage(state.hero)
             }
 
-            if (state.mensaje == null) setPelicula(state)
-        }
-    }
-
-    private fun setEvents() {
-        with(binding) {
-            fun createPelicula(): Pelicula {
-                return Pelicula(
-                    id = id,
-                    titulo = editTextTitulo.text.toString(),
-                    anyoEstreno = editTextAnyoEstreno.text.toString().toIntOrNull() ?: 0,
-                    director = editTextDirector.text.toString(),
-                    genero = findViewById<RadioButton>(radioGroupGenero.checkedRadioButtonId).text.toString()
-                        .lowercase(),
-                    recomendado = checkBoxRecomendado.isChecked,
-                    calificacion = seekBarCalificacion.value.toDouble()
-                )
-            }
-            buttonAdd.setOnClickListener {
-                viewModel.addPelicula(createPelicula())
-                finish()
-            }
-
-            buttonDelete.setOnClickListener {
-                viewModel.deletePelicula()
-                finish()
-            }
-
-            buttonUpdate.setOnClickListener {
-                viewModel.updatePelicula(createPelicula())
-                finish()
-            }
+            if (state.mensaje == null) setHero(state)
         }
     }
 
 
-    private fun setPelicula(state: DetalleState) {
-        state.pelicula.let { pelicula ->
-            binding.editTextTitulo.setText(state.pelicula.titulo)
-            binding.editTextAnyoEstreno.setText(state.pelicula.anyoEstreno.toString())
-            binding.editTextDirector.setText(state.pelicula.director)
-            binding.checkBoxRecomendado.isChecked = state.pelicula.recomendado
-            binding.seekBarCalificacion.value = pelicula.calificacion.toFloat()
-            when ((pelicula.genero?.let { removeAccents(it.lowercase()) })) {
-                Constantes.ACCION -> binding.radioGroupGenero.check(R.id.radioAction)
-                Constantes.DRAMA -> binding.radioGroupGenero.check(R.id.radioDrama)
-                Constantes.COMEDIA -> binding.radioGroupGenero.check(R.id.radioComedia)
-                Constantes.TERROR -> binding.radioGroupGenero.check(R.id.radioTerror)
-                Constantes.FANTASIA -> binding.radioGroupGenero.check(R.id.radioFantasia)
+    private fun setHero(state: DetalleState) {
+        state.hero.let { hero ->
+            binding.editTextName.setText(state.hero?.name)
+            binding.textViewDescription.setText(state.hero?.description)
+            when ((hero?.role?.let { removeAccents(it.lowercase()) })) {
+                Constantes.TANK -> binding.radioGroupRole.check(R.id.radioTank)
+                Constantes.DAMAGE -> binding.radioGroupRole.check(R.id.radioDamage)
+                Constantes.SUPPORT -> binding.radioGroupRole.check(R.id.radioSupport)
+
                 else -> {
-                    binding.radioGroupGenero.clearCheck()
+                    binding.radioGroupRole.clearCheck()
                 }
             }
         }

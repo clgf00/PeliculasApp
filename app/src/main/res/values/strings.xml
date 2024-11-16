@@ -1,23 +1,23 @@
 <resources>
     <string name="app_name">ClaudiaGaleraViewModel</string>
-    <string name="descripcion_slider_calificacion">Calificación</string>
-    <string name="director">Director</string>
-    <string name="nombre">Nombre</string>
+    <string name="slider_dificultad">Dificultad</string>
+    <string name="real_name">Nombre Real</string>
+    <string name="name">Nombre</string>
+    <string name="description">Description</string>
+    <string name="age">Edad</string>
     <string name="right">◄</string>
     <string name="rightbutton">►</string>
-    <string name="pelicula">PELÍCULA</string>
-    <string name="anyo">Año</string>
-    <string name="he_visto_esta_pelicula">He visto esta película</string>
-    <string name="puntua_esta_pelicula">Puntúa esta película</string>
+    <string name="hero">HÉROE</string>
+    <string name="health">Salud</string>
+    <string name="he_jugado">He jugado con este héroe</string>
+    <string name="puntua_esta_pelicula">Puntúa qué tan divertido es</string>
     <string name="comenta_que_te_ha_parecido">Comenta qué te ha parecido</string>
-    <string name="titulo">Título</string>
-    <string name="anyo_de_estreno">Año de Estreno</string>
-    <string name="genero">Género</string>
-    <string name="accion">Acción</string>
-    <string name="drama">Drama</string>
-    <string name="comedia">Comedia</string>
-    <string name="terror">Terror</string>
-    <string name="fantasia">Fantasía</string>
+    <string name="nombre">Nombre</string>
+    <string name="salud">Salud</string>
+    <string name="role">¿Qué rol tiene?</string>
+    <string name="Tank">Tanque</string>
+    <string name="Support">Apoyo</string>
+    <string name="Damage">Daño</string>
     <string name="recomendado">Recomendado</string>
     <string name="calificacion_0">Calificacion</string>
     <string name="agregar">+</string>
@@ -25,10 +25,8 @@
     <string name="actualizar">⟳</string>
     <string name="siguiente">⮕</string>
     <string name="anterior">⬅</string>
-    <string name="año_de_estreno">Año de estreno</string>
+    <string name="Health">Salud</string>
     <string name="agregar2">Agregar</string>
     <string name="ir">IR</string>
-    <string name="titulo2">Titulo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name2">Nombre</string>
 </resources>

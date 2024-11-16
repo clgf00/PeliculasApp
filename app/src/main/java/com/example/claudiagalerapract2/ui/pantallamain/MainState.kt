@@ -1,8 +1,8 @@
 package com.example.claudiagalerapract2.ui.pantallamain
 
-import com.example.claudiagalerapract2.domain.modelo.Pelicula
+import com.example.claudiagalerapract2.domain.modelo.Hero
 
 
 data class MainState(
-    val peliculas: List<Pelicula> = emptyList(),
+    val heroes: List<Hero> = emptyList(),
 )

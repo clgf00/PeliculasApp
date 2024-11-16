@@ -1,6 +1,7 @@
 package com.example.claudiagalerapract2.ui.listado
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,21 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.claudiagalerapract2.databinding.FragmentListadoPeliculasBinding
-import com.example.claudiagalerapract2.domain.modelo.Pelicula
+import com.example.claudiagalerapract2.databinding.FragmentListadoBinding
+import com.example.claudiagalerapract2.domain.modelo.Hero
 import dagger.hilt.android.AndroidEntryPoint
-
+//F
 @AndroidEntryPoint
 class ListadoFragment : Fragment() {
 
     private val viewModel: ListadoViewModel by viewModels()
-    private var _binding: FragmentListadoPeliculasBinding? = null
+    private var _binding: FragmentListadoBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: PeliculaAdapter
+    private lateinit var adapter: HeroAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentListadoPeliculasBinding.inflate(inflater, container, false)
+        _binding = FragmentListadoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,9 +31,8 @@ class ListadoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModel.handleEvent(ListadoEvent.GetPeliculas)
-        binding.fab.setOnClickListener {
-        }
+        viewModel.handleEvent(ListadoEvent.GetHeroes)
+
 
         configureRecyclerView()
         observarState()
@@ -41,26 +41,24 @@ class ListadoFragment : Fragment() {
 
     private fun observarState() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            adapter.submitList(state.peliculas)
-            binding.listaPeliculas.visibility = View.VISIBLE
+            adapter.submitList(state.heroes)
+            binding.listaHeroes.visibility = View.VISIBLE
 
         }
     }
 
     private fun configureRecyclerView() {
-
-        adapter = PeliculaAdapter(
-            actions = object : PeliculaAdapter.PeliculasActions {
-                override fun onItemClick(pelicula: Pelicula) {
-                    val action = ListadoFragmentDirections.actionListadoFragmentToDetalleFragment(pelicula.id, false)
+        adapter = HeroAdapter(
+            actions = object : HeroAdapter.HeroesActions {
+                override fun onItemClick(hero: Hero) {
+                    val heroId = hero.key
+                    val action = ListadoFragmentDirections.actionListadoFragmentToDetalleFragment(heroId, false)
                     findNavController().navigate(action)
-
                 }
             })
 
-        binding.listaPeliculas.layoutManager = LinearLayoutManager(activity)
-        binding.listaPeliculas.adapter = adapter
-
+        binding.listaHeroes.layoutManager = LinearLayoutManager(activity)
+        binding.listaHeroes.adapter = adapter
     }
 
     override fun onDestroyView() {

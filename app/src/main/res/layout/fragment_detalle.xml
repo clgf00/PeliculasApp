@@ -5,183 +5,115 @@
     android:id="@+id/detalle_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="@dimen/padding_general"
     tools:context=".ui.listado.DetalleFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pelicula"
-        android:textSize="24sp"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:text="@string/hero"
+        android:textSize="@dimen/text_size_title"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageHero"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextTituloLayout"
+        android:id="@+id/editTextNombreLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/titulo"
+        android:layout_marginTop="@dimen/margin_large"
+        android:hint="@string/nombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView">
+        app:layout_constraintTop_toBottomOf="@id/imageHero">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextTitulo"
+            android:id="@+id/edit_text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp" />
+            android:minHeight="@dimen/min_height_input" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Añadir un campo de texto para la Edad -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextDirectorLayout"
+        android:id="@+id/editTextAgeLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/director"
+        android:layout_marginTop="@dimen/margin_large"
+        android:hint="@string/age"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextTituloLayout">
+        app:layout_constraintTop_toBottomOf="@id/editTextNombreLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextDirector"
+            android:id="@+id/edit_text_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextAnyoEstrenoLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/anyo_de_estreno"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextDirectorLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextAnyoEstreno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp" />
+            android:minHeight="@dimen/min_height_input"
+            android:inputType="number" /> <!-- Input type set to number for age -->
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/generoTextView"
+        android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/genero"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextAnyoEstrenoLayout" />
+        app:layout_constraintTop_toBottomOf="@id/editTextAgeLayout" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/roleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:text="@string/role"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewDescription" />
 
     <RadioGroup
-        android:id="@+id/radioGroupGenero"
+        android:id="@+id/radio_group_role"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/generoTextView">
+        app:layout_constraintTop_toBottomOf="@id/roleTextView">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioAction"
+            android:id="@+id/radioTank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/accion" />
+            android:text="@string/Tank" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioDrama"
+            android:id="@+id/radioDamage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/drama" />
+            android:text="@string/Damage" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioComedia"
+            android:id="@+id/radioSupport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/comedia" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioTerror"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/terror" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radioFantasia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fantasia" />
+            android:text="@string/Support" />
     </RadioGroup>
-
-    <CheckBox
-        android:id="@+id/checkBoxRecomendado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/recomendado"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupGenero" />
-
-    <com.google.android.material.slider.Slider
-        android:id="@+id/seekBarCalificacion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/descripcion_slider_calificacion"
-        android:valueFrom="0.0"
-        android:valueTo="5.0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBoxRecomendado" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textViewCalificacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/calificacion_0"
-        app:layout_constraintBottom_toTopOf="@id/buttonAdd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/seekBarCalificacion" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonAdd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/agregar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonUpdate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCalificacion"
-        app:layout_constraintVertical_bias="0.467" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonUpdate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/actualizar"
-        app:layout_constraintBottom_toBottomOf="@id/buttonAdd"
-        app:layout_constraintEnd_toStartOf="@id/buttonDelete"
-        app:layout_constraintStart_toEndOf="@+id/buttonAdd"
-        app:layout_constraintTop_toTopOf="@+id/buttonAdd" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonDelete"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/eliminar"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonUpdate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonUpdate"
-        app:layout_constraintTop_toTopOf="@+id/buttonUpdate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

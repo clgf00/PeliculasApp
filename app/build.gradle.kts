@@ -24,6 +24,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_URL", "\"https://overfast-api.tekrop.fr\"")
     }
 
     buildTypes {
@@ -55,6 +56,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+
+
     // Lifecycle libraries
     // by ViewModels delegation extensions for activity
     implementation(libs.androidx.activity.ktx)
@@ -71,6 +74,12 @@ dependencies {
 
     //Logs
     implementation(libs.timber)
+
+    //retrofit
+    implementation(libs.bundles.retrofit)
+
+    //coil
+    implementation(libs.coil)
 
     //Librerias del viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
