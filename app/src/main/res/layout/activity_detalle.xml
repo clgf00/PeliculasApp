@@ -48,7 +48,6 @@
             android:minHeight="@dimen/min_height_input" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Añadir un campo de texto para la Edad -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextAgeLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

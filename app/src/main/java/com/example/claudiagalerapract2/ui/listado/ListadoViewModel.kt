@@ -28,8 +28,7 @@ class ListadoViewModel @Inject constructor(
 
     private fun obtenerHeroes() {
         viewModelScope.launch {
-            val result = getHeroes()
-            when (result) {
+            when (val result = getHeroes()) {
                 is NetworkResult.Success -> {
                     val heroes = result.data ?: emptyList()
                     _uiState.value = MainState(heroes = heroes)
@@ -46,16 +45,9 @@ class ListadoViewModel @Inject constructor(
         }
     }
 
-    private fun deleteHeroe(hero: Hero) {
-        val currentList = _uiState.value?.heroes?.toMutableList() ?: mutableListOf()
-        currentList.remove(hero)
-        _uiState.value = _uiState.value?.copy(heroes = currentList)
-    }
-
     fun handleEvent(event: ListadoEvent) {
         when (event) {
             is ListadoEvent.GetHeroes -> obtenerHeroes()
-            is ListadoEvent.DeleteHero -> deleteHeroe(event.hero)
             is ListadoEvent.UiEventDone -> {
             }
         }

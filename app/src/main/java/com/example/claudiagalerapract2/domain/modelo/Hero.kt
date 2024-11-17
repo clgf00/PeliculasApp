@@ -6,6 +6,6 @@ data class Hero(
     var portrait: String  = "",
     val role: String = "",
     val description: String? = "",
-    val age: Int? = 0
+    val age: String? = ""
 )
 

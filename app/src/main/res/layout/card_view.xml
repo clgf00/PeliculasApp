@@ -10,7 +10,24 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cardview_dark_background">
+        android:background="@color/md_theme_onSecondaryFixedVariant">
+
+        <ImageView
+            android:id="@+id/hero_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_texts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="100dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
@@ -27,14 +44,14 @@
             android:textColor="@color/md_theme_onPrimaryFixed_mediumContrast"
             android:textSize="35sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/location"
+            app:layout_constraintBottom_toTopOf="@+id/role"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Histidine" />
 
 
         <TextView
-            android:id="@+id/location"
+            android:id="@+id/role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -54,8 +71,8 @@
             android:textColor="@color/md_theme_onPrimaryFixed_mediumContrast"
 
             android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@+id/location"
-            app:layout_constraintStart_toEndOf="@+id/location"
+            app:layout_constraintBottom_toBottomOf="@+id/role"
+            app:layout_constraintStart_toEndOf="@+id/role"
             tools:text="H" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

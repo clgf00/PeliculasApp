@@ -5,10 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import com.example.claudiagalerapract2.R
 import com.example.claudiagalerapract2.databinding.FragmentListadoBinding
 import com.example.claudiagalerapract2.domain.modelo.Hero
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,8 +32,6 @@ class ListadoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         viewModel.handleEvent(ListadoEvent.GetHeroes)
 
 
@@ -42,8 +43,18 @@ class ListadoFragment : Fragment() {
     private fun observarState() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.heroes)
-            binding.listaHeroes.visibility = View.VISIBLE
 
+            state.heroes.forEachIndexed { index, hero ->
+                val viewHolder = binding.listaHeroes.findViewHolderForAdapterPosition(index)
+                val itemView = viewHolder?.itemView
+                val imageView = itemView?.findViewById<ImageView>(R.id.hero_image)
+
+                imageView?.load(hero.portrait) {
+                    crossfade(true)
+                }
+            }
+
+            binding.listaHeroes.visibility = View.VISIBLE
         }
     }
 

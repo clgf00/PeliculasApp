@@ -65,7 +65,7 @@ class DetalleFragment : Fragment() {
             }
             binding.editTextName.setText(hero.name)
             binding.textViewDescription.text = hero.description
-
+            binding.editTextAge.setText(hero.age)
             when (removeAccents(hero.role.lowercase())) {
                 Constantes.TANK -> binding.radioGroupRole.check(R.id.radioTank)
                 Constantes.DAMAGE -> binding.radioGroupRole.check(R.id.radioDamage)

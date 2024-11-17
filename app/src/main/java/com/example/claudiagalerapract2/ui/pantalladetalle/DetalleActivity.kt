@@ -1,5 +1,4 @@
 package com.example.claudiagalerapract2.ui.pantalladetalle
-//F
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +12,7 @@ import com.example.claudiagalerapract2.databinding.ActivityDetalleBinding
 import com.example.claudiagalerapract2.domain.modelo.Hero
 import com.example.claudiagalerapract2.ui.common.Constantes
 import dagger.hilt.android.AndroidEntryPoint
+//F
 
 @AndroidEntryPoint
 class DetalleActivity : AppCompatActivity() {
@@ -69,7 +69,8 @@ class DetalleActivity : AppCompatActivity() {
     private fun setHero(state: DetalleState) {
         state.hero.let { hero ->
             binding.editTextName.setText(state.hero?.name)
-            binding.textViewDescription.setText(state.hero?.description)
+            state.hero?.let { binding.editTextAge.setText(it.age) }
+            binding.textViewDescription.text = state.hero?.description
             when ((hero?.role?.let { removeAccents(it.lowercase()) })) {
                 Constantes.TANK -> binding.radioGroupRole.check(R.id.radioTank)
                 Constantes.DAMAGE -> binding.radioGroupRole.check(R.id.radioDamage)
