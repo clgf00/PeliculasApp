@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.claudiagalerapract2.R
 import com.example.claudiagalerapract2.domain.modelo.Hero
 
-//F
 class HeroAdapter(
     val actions: HeroesActions
 ) : ListAdapter<Hero, HeroItemViewHolder>(DiffCallback()) {

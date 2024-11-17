@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_general"
-    tools:context=".ui.listado.DetalleFragment">
+    tools:context=".ui.pantalladetalle.DetalleFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/titleTextView"
@@ -25,7 +25,9 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginTop="@dimen/margin_small"
-        android:scaleType="centerCrop"
+        android:layout_marginBottom="24dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNombreLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTextView" />

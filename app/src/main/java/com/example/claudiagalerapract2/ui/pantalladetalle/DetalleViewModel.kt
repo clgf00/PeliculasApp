@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
-import com.example.claudiagalerapract2.domain.usecases.peliculas.GetHero
+import com.example.claudiagalerapract2.domain.usecases.heroes.GetHero
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

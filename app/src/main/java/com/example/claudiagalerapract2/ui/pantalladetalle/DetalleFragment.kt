@@ -1,4 +1,4 @@
-package com.example.claudiagalerapract2.ui.listado
+package com.example.claudiagalerapract2.ui.pantalladetalle
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,8 +12,6 @@ import coil.load
 import com.example.claudiagalerapract2.R
 import com.example.claudiagalerapract2.databinding.FragmentDetalleBinding
 import com.example.claudiagalerapract2.ui.common.Constantes
-import com.example.claudiagalerapract2.ui.pantalladetalle.DetalleState
-import com.example.claudiagalerapract2.ui.pantalladetalle.DetalleViewModel
 
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -6,7 +6,7 @@ import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class PeliculasApp : Application() {
+class OverwatchApp : Application() {
 
     override fun onCreate() {
         super.onCreate()

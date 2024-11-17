@@ -1,4 +1,4 @@
-package com.example.claudiagalerapract2.domain.usecases.peliculas
+package com.example.claudiagalerapract2.domain.usecases.heroes
 
 import com.example.claudiagalerapract2.data.HeroRepository
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult

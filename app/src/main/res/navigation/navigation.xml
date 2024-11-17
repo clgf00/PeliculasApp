@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/detalleFragment"
-        android:name="com.example.claudiagalerapract2.ui.listado.DetalleFragment"
+        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.DetalleFragment"
         android:label="Detalle de Heroe"
         tools:layout="@layout/fragment_detalle">
         <argument

@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_general"
-    tools:context=".ui.listado.DetalleFragment">
+    tools:context=".ui.pantalladetalle.DetalleFragment">
 
     <ImageView
         android:id="@+id/imageHero"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/margin_small"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/detailLayout"
         app:layout_constraintStart_toStartOf="parent"

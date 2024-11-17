@@ -5,12 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
-import com.example.claudiagalerapract2.domain.modelo.Hero
-import com.example.claudiagalerapract2.domain.usecases.peliculas.GetHeroes
+import com.example.claudiagalerapract2.domain.usecases.heroes.GetHeroes
 import com.example.claudiagalerapract2.ui.pantallamain.MainState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 

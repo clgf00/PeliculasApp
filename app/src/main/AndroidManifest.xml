@@ -6,7 +6,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name=".PeliculasApp"
+        android:name=".OverwatchApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -25,11 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.pantalladetalle.DetalleActivity"
-            android:exported="false">
 
-        </activity>
     </application>
 
 </manifest>
