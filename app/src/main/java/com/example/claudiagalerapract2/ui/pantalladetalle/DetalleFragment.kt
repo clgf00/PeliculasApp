@@ -38,7 +38,6 @@ class DetalleFragment : Fragment() {
             viewModel.cambiarHeroe(heroId)
         }
         return binding.root
-
     }
 
     private fun observarViewModel() {

@@ -1,4 +1,4 @@
-package com.example.claudiagalerapract2.data.remote.di.apiServices
+package com.example.claudiagalerapract2.data.remote.apiServices
 
 import com.example.claudiagalerapract2.data.remote.di.modelo.HeroRemote
 import retrofit2.Response
@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface HeroService {
 
     @GET("/heroes")
-    suspend fun getHeroes(@Query("hero") hero: String): Response<List<HeroRemote>>
+    suspend fun getHeroes(): Response<List<HeroRemote>>
 
 
     @GET("/heroes/{key}")

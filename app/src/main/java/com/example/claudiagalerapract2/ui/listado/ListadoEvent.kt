@@ -9,5 +9,5 @@ sealed class ListadoEvent {
     //to.do lo de abajo será class cuando tenga parámetros, y object cuando no los tenga
     data object GetHeroes : ListadoEvent()
     //hasta aquí to.do será respuesta a un select, a un onclick...
-    data object UiEventDone : ListadoEvent()
+
 }

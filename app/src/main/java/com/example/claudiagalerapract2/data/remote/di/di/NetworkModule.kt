@@ -1,7 +1,7 @@
 package com.example.claudiagalerapract2.data.remote.di.di
 
 import com.example.claudiagalerapract2.BuildConfig
-import com.example.claudiagalerapract2.data.remote.di.apiServices.HeroService
+import com.example.claudiagalerapract2.data.remote.apiServices.HeroService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

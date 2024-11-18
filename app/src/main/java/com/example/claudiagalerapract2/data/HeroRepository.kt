@@ -1,9 +1,8 @@
 package com.example.claudiagalerapract2.data
 
-import com.example.claudiagalerapract2.data.remote.di.apiServices.HeroService
+import com.example.claudiagalerapract2.data.remote.apiServices.HeroService
 import com.example.claudiagalerapract2.data.remote.di.dataSource.HeroesRemoteDataSource
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
-import com.example.claudiagalerapract2.data.remote.di.modelo.toHero
 import com.example.claudiagalerapract2.data.remote.di.modelo.toHeroDetail
 import com.example.claudiagalerapract2.domain.modelo.Hero
 import javax.inject.Inject

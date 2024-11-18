@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 //F
-
 @HiltViewModel
 class DetalleViewModel @Inject constructor(
     private val getHero: GetHero,

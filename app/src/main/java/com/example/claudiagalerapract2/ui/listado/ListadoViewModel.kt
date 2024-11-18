@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
 import com.example.claudiagalerapract2.domain.usecases.heroes.GetHeroes
-import com.example.claudiagalerapract2.ui.pantallamain.MainState
+import com.example.claudiagalerapract2.ui.pantallamain.ListadoState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,8 +17,8 @@ class ListadoViewModel @Inject constructor(
     private val getHeroes: GetHeroes
 ) : ViewModel() {
 
-    private val _uiState = MutableLiveData(MainState())
-    val uiState: LiveData<MainState> get() = _uiState
+    private val _uiState = MutableLiveData(ListadoState())
+    val uiState: LiveData<ListadoState> get() = _uiState
 
     init {
         handleEvent(ListadoEvent.GetHeroes)
@@ -29,15 +29,15 @@ class ListadoViewModel @Inject constructor(
             when (val result = getHeroes()) {
                 is NetworkResult.Success -> {
                     val heroes = result.data ?: emptyList()
-                    _uiState.value = MainState(heroes = heroes)
+                    _uiState.value = ListadoState(heroes = heroes)
 
                 }
                 is NetworkResult.Error -> {
-                    _uiState.value = MainState(heroes = emptyList())
+                    _uiState.value = ListadoState(heroes = emptyList())
                 }
 
                 is NetworkResult.Loading -> {
-                    _uiState.value = MainState(heroes = emptyList())
+                    _uiState.value = ListadoState(heroes = emptyList())
                 }
             }
         }
@@ -46,8 +46,6 @@ class ListadoViewModel @Inject constructor(
     fun handleEvent(event: ListadoEvent) {
         when (event) {
             is ListadoEvent.GetHeroes -> obtenerHeroes()
-            is ListadoEvent.UiEventDone -> {
             }
         }
     }
-}
