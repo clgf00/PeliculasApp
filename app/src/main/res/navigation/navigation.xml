@@ -2,33 +2,139 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/listadoFragment">
+    app:startDestination="@id/listadoTodoFragment">
 
     <fragment
-        android:id="@+id/listadoFragment"
-        android:name="com.example.claudiagalerapract2.ui.listado.ListadoFragment"
-        android:label="Listado de Películas"
-        tools:layout="@layout/fragment_listado">
-
+        android:id="@+id/listadoTodoFragment"
+        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoTodoFragment"
+        android:label="Listado de Todos"
+        tools:layout="@layout/fragment_listado_todos">
         <action
-            android:id="@+id/action_listadoFragment_to_detalleFragment"
-            app:destination="@id/detalleFragment">
-            <argument
-                android:name="heroId"
-                app:argType="string" />
+            android:id="@+id/action_listadoTodoFragment_to_detalleFragmentTodo"
+            app:destination="@id/detalleFragmentTodo" >
+        <argument
+            android:name="todoId"
+            app:argType="integer" />
         </action>
     </fragment>
 
     <fragment
-        android:id="@+id/detalleFragment"
-        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.DetalleFragment"
-        android:label="Detalle de Heroe"
-        tools:layout="@layout/fragment_detalle">
-        <argument
-            android:name="heroId"
-            app:argType="string" />
-        <argument
-            android:name="nuevo"
-            app:argType="boolean" />
+        android:id="@+id/listadoPostFragment"
+        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoPostFragment"
+        android:label="Listado de Posts"
+        tools:layout="@layout/fragment_listado_posts">
+        <action
+            android:id="@+id/action_listadoPostFragment_to_detalleFragmentPost"
+            app:destination="@id/detalleFragmentPost">
+            <argument
+                android:name="postId"
+                app:argType="integer" />
+        </action>
     </fragment>
+    <fragment
+        android:id="@+id/detalleFragmentPost"
+        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentPost"
+        android:label="Detalle de Post"
+        tools:layout="@layout/fragment_detalle_post">
+        <argument
+            android:name="postId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detalleFragmentPost_to_listadoCommentFragment"
+            app:destination="@id/listadoCommentFragment">
+            <argument
+                android:name="postId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/listadoCommentFragment"
+        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoCommentFragment"
+        android:label="Listado de Comentarios"
+        tools:layout="@layout/fragment_listado_comments">
+        <action
+            android:id="@+id/action_listadoCommentFragment_to_detalleFragmentComment"
+            app:destination="@id/detalleFragmentComment">
+            <argument
+                android:name="commentId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleFragmentComment"
+        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentComment"
+        android:label="Detalle de Comentario"
+        tools:layout="@layout/fragment_detalle_comment">
+        <argument
+            android:name="commentId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listadoAlbumFragment"
+        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoAlbumFragment"
+        android:label="Listado de Álbumes"
+        tools:layout="@layout/fragment_listado_album">
+        <action
+            android:id="@+id/action_listadoAlbumFragment_to_detalleFragmentAlbum"
+            app:destination="@id/detalleFragmentAlbum">
+            <argument
+                android:name="albumId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleFragmentAlbum"
+        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentAlbum"
+        android:label="Detalle de Álbum"
+        tools:layout="@layout/fragment_detalle_album">
+        <argument
+            android:name="albumId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detalleFragmentAlbum_to_listadoPhotoFragment"
+            app:destination="@id/listadoPhotoFragment">
+            <argument
+                android:name="albumId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/listadoPhotoFragment"
+        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoPhotoFragment"
+        android:label="Listado de Fotos"
+        tools:layout="@layout/fragment_listado_photo">
+        <action
+            android:id="@+id/action_listadoPhotoFragment_to_detalleFragmentPhoto"
+            app:destination="@id/detalleFragmentPhoto">
+            <argument
+                android:name="photoId"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleFragmentPhoto"
+        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentPhoto"
+        android:label="Detalle de Foto"
+        tools:layout="@layout/fragment_detalle_photo">
+        <argument
+            android:name="photoId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleFragmentTodo"
+        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentTodo"
+        android:label="Detalle de Todo"
+        tools:layout="@layout/fragment_detalle_todo">
+        <argument
+            android:name="todoId"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

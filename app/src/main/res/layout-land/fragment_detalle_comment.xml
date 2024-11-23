@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.pantalladetalle.fragments.DetalleFragmentComment">
+
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/comment_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="8dp"
+            android:text="@string/nombre_del_autor" />
+
+        <TextView
+            android:id="@+id/comment_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#3F51B5"
+            android:fontFamily="sans-serif"
+            android:layout_marginBottom="8dp"
+            android:text="@string/email_del_autor" />
+
+        <TextView
+            android:id="@+id/comment_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#333"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/texto_del_comentario" />
+    </LinearLayout>
+</ScrollView>
