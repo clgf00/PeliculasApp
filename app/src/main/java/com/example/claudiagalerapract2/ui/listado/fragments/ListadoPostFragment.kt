@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.claudiagalerapract2.R
-import com.example.claudiagalerapract2.databinding.FragmentListadoPostsBinding
-import com.example.claudiagalerapract2.databinding.FragmentListadoUserBinding
+import com.example.claudiagalerapract2.databinding.FragmentListadoBinding
 import com.example.claudiagalerapract2.domain.modelo.Post
 import com.example.claudiagalerapract2.ui.listado.adapters.PostAdapter
 import com.example.claudiagalerapract2.ui.listado.events.ListadoPostEvent
@@ -21,13 +19,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class ListadoPostFragment : Fragment() {
 
     private val viewModel: ListadoPostViewModel by viewModels()
-    private var _binding: FragmentListadoPostsBinding? = null
+    private var _binding: FragmentListadoBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: PostAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentListadoPostsBinding.inflate(inflater, container, false)
+        _binding = FragmentListadoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,7 +40,7 @@ class ListadoPostFragment : Fragment() {
     private fun observarState() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.posts)
-            binding.listaPosts.visibility = View.VISIBLE
+            binding.lista?.visibility = View.VISIBLE
         }
     }
 
@@ -56,8 +54,8 @@ class ListadoPostFragment : Fragment() {
                 }
             })
 
-        binding.listaPosts.layoutManager = LinearLayoutManager(activity)
-        binding.listaPosts.adapter = adapter
+        binding.lista?.layoutManager = LinearLayoutManager(activity)
+        binding.lista?.adapter = adapter
     }
 
     override fun onDestroyView() {

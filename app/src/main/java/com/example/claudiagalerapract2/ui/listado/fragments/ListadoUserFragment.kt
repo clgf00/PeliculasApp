@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.claudiagalerapract2.R
-import com.example.claudiagalerapract2.databinding.FragmentListadoUserBinding
+import com.example.claudiagalerapract2.databinding.FragmentListadoBinding
 import com.example.claudiagalerapract2.domain.modelo.User
 import com.example.claudiagalerapract2.ui.listado.adapters.UserAdapter
 import com.example.claudiagalerapract2.ui.listado.events.ListadoUserEvent
@@ -22,13 +22,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class ListadoUserFragment : Fragment() {
 
     private val viewModel: ListadoUserViewModel by viewModels()
-    private var _binding: FragmentListadoUserBinding? = null
+    private var _binding: FragmentListadoBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: UserAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentListadoUserBinding.inflate(inflater, container, false)
+        _binding = FragmentListadoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,7 +47,7 @@ class ListadoUserFragment : Fragment() {
             adapter.submitList(state.users)
 
             state.users.forEachIndexed { index, user ->
-                val viewHolder = binding.listaUsers.findViewHolderForAdapterPosition(index)
+                val viewHolder = binding.lista?.findViewHolderForAdapterPosition(index)
                 val itemView = viewHolder?.itemView
                 val imageView = itemView?.findViewById<ImageView>(R.id.image)
                 imageView?.load(user.username) {
@@ -55,7 +55,7 @@ class ListadoUserFragment : Fragment() {
                 }
             }
 
-            binding.listaUsers.visibility = View.VISIBLE
+            binding.listaUsers?.visibility = View.VISIBLE
         }
     }
 
@@ -69,8 +69,8 @@ class ListadoUserFragment : Fragment() {
                 }
             })
 
-        binding.listaUsers.layoutManager = LinearLayoutManager(activity)
-        binding.listaUsers.adapter = adapter
+        binding.lista?.layoutManager = LinearLayoutManager(activity)
+        binding.lista?.adapter = adapter
     }
 
     override fun onDestroyView() {

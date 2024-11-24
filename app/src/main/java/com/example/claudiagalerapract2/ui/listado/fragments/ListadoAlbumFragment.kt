@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.claudiagalerapract2.databinding.FragmentListadoAlbumBinding
+import com.example.claudiagalerapract2.databinding.FragmentListadoBinding
 import com.example.claudiagalerapract2.domain.modelo.Album
 import com.example.claudiagalerapract2.ui.listado.adapters.AlbumAdapter
 import com.example.claudiagalerapract2.ui.listado.events.ListadoAlbumEvent
@@ -19,13 +19,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class ListadoAlbumFragment : Fragment() {
 
     private val viewModel: ListadoAlbumViewModel by viewModels()
-    private var _binding: FragmentListadoAlbumBinding? = null
+    private var _binding: FragmentListadoBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: AlbumAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentListadoAlbumBinding.inflate(inflater, container, false)
+        _binding = FragmentListadoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,7 +40,7 @@ class ListadoAlbumFragment : Fragment() {
     private fun observarState() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.albums)
-            binding.listaAlbum.visibility = View.VISIBLE
+            binding.lista?.visibility = View.VISIBLE
         }
     }
 
@@ -54,8 +54,8 @@ class ListadoAlbumFragment : Fragment() {
                 }
             })
 
-        binding.listaAlbum.layoutManager = LinearLayoutManager(activity)
-        binding.listaAlbum.adapter = adapter
+        binding.lista?.layoutManager = LinearLayoutManager(activity)
+        binding.lista?.adapter = adapter
     }
 
     override fun onDestroyView() {

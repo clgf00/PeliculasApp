@@ -47,7 +47,7 @@ class DetalleFragmentPost : Fragment() {
     }
 
     private fun setPost(post: Post) {
-        binding.textViewTitle.text = post.title
-        binding.textViewBody.text = post.body
+        binding.postTitle!!.text = post.title
+        binding.postBody!!.text = post.body
     }
 }

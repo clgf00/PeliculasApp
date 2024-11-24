@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.claudiagalerapract2.databinding.FragmentListadoTodosBinding
+import com.example.claudiagalerapract2.databinding.FragmentListadoBinding
 import com.example.claudiagalerapract2.domain.modelo.Todo
 import com.example.claudiagalerapract2.ui.listado.adapters.TodoAdapter
 import com.example.claudiagalerapract2.ui.listado.events.ListadoTodoEvent
@@ -19,13 +19,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class ListadoTodoFragment : Fragment() {
 
     private val viewModel: ListadoTodoViewModel by viewModels()
-    private var _binding: FragmentListadoTodosBinding? = null
+    private var _binding: FragmentListadoBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: TodoAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentListadoTodosBinding.inflate(inflater, container, false)
+        _binding = FragmentListadoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -53,8 +53,8 @@ class ListadoTodoFragment : Fragment() {
                 }
             })
 
-        binding.listaTodos.layoutManager = LinearLayoutManager(activity)
-        binding.listaTodos.adapter = adapter
+        binding.lista?.layoutManager = LinearLayoutManager(activity)
+        binding.lista?.adapter = adapter
     }
 
 
