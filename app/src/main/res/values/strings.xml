@@ -33,4 +33,9 @@
  <string name="body">Body</string>
  <string name="t_tulo_de_la_tarea">Título de la tarea</string>
  <string name="estado_completado">Estado: Completado</string>
+    <string name="add">+</string>
+    <string name="login_title">Login</string>
+    <string name="poststitle">Posts</string>
+    <string name="comment_title">comment title</string>
+    <string name="top_app_bar">Top App Bar</string>
 </resources>

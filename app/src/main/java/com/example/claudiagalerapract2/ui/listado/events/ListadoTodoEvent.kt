@@ -1,11 +1,10 @@
 package com.example.claudiagalerapract2.ui.listado.events
 
+import com.example.claudiagalerapract2.domain.modelo.Todo
+
 sealed class ListadoTodoEvent {
-    //esto hara que el viewModel solo tenga un metodo publico handleEvent.
-    // Es to.do lo que hará la pantalla
-    //to.do lo de abajo será class cuando tenga parámetros, y object cuando no los tenga
     data object GetTodos : ListadoTodoEvent()
-
-    //hasta aquí to.do será respuesta a un select, a un onclick...
-
+    data class DeleteTodo(val todoId: Int) : ListadoTodoEvent()
+    data class UpdateTodo(val todoId: Int, val updatedContent: String) : ListadoTodoEvent()
+    data class AddTodo(val newCommentContent: Todo) : ListadoTodoEvent()
 }

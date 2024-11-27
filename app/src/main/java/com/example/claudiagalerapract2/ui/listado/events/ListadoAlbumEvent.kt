@@ -1,11 +1,8 @@
 package com.example.claudiagalerapract2.ui.listado.events
 
 sealed class ListadoAlbumEvent {
-    //esto hara que el viewModel solo tenga un metodo publico handleEvent.
-    // Es to.do lo que hará la pantalla
-    //to.do lo de abajo será class cuando tenga parámetros, y object cuando no los tenga
     data object GetAlbums : ListadoAlbumEvent()
-
-    //hasta aquí to.do será respuesta a un select, a un onclick...
-
+    data class DeleteAlbum(val albumId: Int) : ListadoAlbumEvent()
+    data class UpdateAlbum(val albumId: Int, val updatedContent: String) : ListadoAlbumEvent()
+    data class AddAlbum(val newAlbumContent: String) : ListadoAlbumEvent()
 }

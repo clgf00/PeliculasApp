@@ -14,7 +14,7 @@ class PostAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostItemViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_detalle_post, parent, false)
+            .inflate(R.layout.cardview_post, parent, false)
         return PostItemViewHolder(view, actions)
     }
 

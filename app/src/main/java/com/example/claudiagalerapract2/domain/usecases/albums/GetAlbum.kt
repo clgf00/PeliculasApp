@@ -6,7 +6,7 @@ import com.example.claudiagalerapract2.domain.modelo.Album
 import javax.inject.Inject
 
 class GetAlbum @Inject constructor(private val repository: AlbumRepository) {
-    suspend operator fun invoke(key: Int): NetworkResult<Album> {
-        return repository.fetchAlbum(key)
+    suspend operator fun invoke(int: Int): NetworkResult<Album> {
+        return repository.fetchAlbum(int)
     }
 }

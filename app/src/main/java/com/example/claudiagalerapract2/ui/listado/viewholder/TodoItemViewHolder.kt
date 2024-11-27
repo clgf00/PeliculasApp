@@ -2,8 +2,7 @@ package com.example.claudiagalerapract2.ui.listado.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.claudiagalerapract2.databinding.CardViewBinding
-import com.example.claudiagalerapract2.databinding.FragmentDetalleTodoBinding
+import com.example.claudiagalerapract2.databinding.CardviewTodoBinding
 import com.example.claudiagalerapract2.domain.modelo.Todo
 import com.example.claudiagalerapract2.ui.listado.adapters.TodoAdapter
 
@@ -13,7 +12,7 @@ class TodoItemViewHolder (
 ) :
     RecyclerView.ViewHolder(itemView) {
 
-    private val binding = FragmentDetalleTodoBinding.bind(itemView)
+    private val binding = CardviewTodoBinding.bind(itemView)
 
     fun bind(todo: Todo) {
         with(binding) {

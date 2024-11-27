@@ -19,18 +19,6 @@ abstract class BaseApiResponse {
         }
     }
 
-    suspend fun <T> safeApiCallNoBody(apiCall: suspend () -> Response<T>): NetworkResult<Boolean> {
-        try {
-            val response = apiCall()
-            if (response.isSuccessful) {
-                return NetworkResult.Success(true)
-            }
-            return error("${response.code()} ${response.message()}")
-        } catch (e: Exception) {
-            return error(e.message ?: e.toString())
-        }
-    }
-
 
     private fun <T> error(errorMessage: String): NetworkResult<T> =
         NetworkResult.Error("Api call failed $errorMessage")

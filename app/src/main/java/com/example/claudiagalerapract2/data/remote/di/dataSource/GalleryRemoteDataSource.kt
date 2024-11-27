@@ -5,7 +5,6 @@ import com.example.claudiagalerapract2.data.remote.apiServices.CommentService
 import com.example.claudiagalerapract2.data.remote.apiServices.PhotoService
 import com.example.claudiagalerapract2.data.remote.apiServices.PostService
 import com.example.claudiagalerapract2.data.remote.apiServices.TodoService
-import com.example.claudiagalerapract2.data.remote.apiServices.UserService
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
 import com.example.claudiagalerapract2.data.remote.di.modelo.toAlbum
 import com.example.claudiagalerapract2.data.remote.di.modelo.toComment
@@ -18,7 +17,6 @@ import com.example.claudiagalerapract2.domain.modelo.Comment
 import com.example.claudiagalerapract2.domain.modelo.Photo
 import com.example.claudiagalerapract2.domain.modelo.Post
 import com.example.claudiagalerapract2.domain.modelo.Todo
-import com.example.claudiagalerapract2.domain.modelo.User
 import javax.inject.Inject
 
 class GalleryRemoteDataSource @Inject constructor(

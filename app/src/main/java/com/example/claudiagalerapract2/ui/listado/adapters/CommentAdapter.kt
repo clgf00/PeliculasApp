@@ -14,7 +14,7 @@ class CommentAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentItemViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_detalle_comment, parent, false)
+            .inflate(R.layout.cardview_comment, parent, false)
         return CommentItemViewHolder(view, actions)
     }
 

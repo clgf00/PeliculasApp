@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.claudiagalerapract2.databinding.FragmentDetalleTodoBinding
 import com.example.claudiagalerapract2.domain.modelo.Todo
+import com.example.claudiagalerapract2.ui.common.Constantes
 import com.example.claudiagalerapract2.ui.pantalladetalle.viewmodel.DetalleTodoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +32,22 @@ class DetalleFragmentTodo : Fragment() {
 
         observarViewModel()
         viewModel.cambiarTodo(todoId)
+
+        binding.deleteTodoButton.setOnClickListener {
+            viewModel.eliminarTodo(todoId)
+            Toast.makeText(requireContext(), Constantes.ELIMINADO, Toast.LENGTH_SHORT).show()
+            findNavController().navigateUp()
+        }
+        binding.updateTodoButton.setOnClickListener {
+            val updatedBody = binding.todoTitle.text.toString()
+            if (updatedBody.isNotEmpty()) {
+                viewModel.actualizarTodo(todoId, updatedBody)
+                Toast.makeText(requireContext(), Constantes.ACTUALIZADO_EXITO, Toast.LENGTH_SHORT).show()
+                findNavController().navigateUp()
+            } else {
+                Toast.makeText(requireContext(), Constantes.ERROR, Toast.LENGTH_SHORT).show()
+            }
+        }
         return binding.root
     }
 
@@ -46,7 +64,7 @@ class DetalleFragmentTodo : Fragment() {
     }
 
     private fun setTodo(todo: Todo) {
-        binding.todoTitle.text = todo.title
-        binding.todoCompleted.text = if (todo.completed) "Completed" else "Not Completed"
+        binding.todoTitle.setText(todo.title)
+        binding.todoCompleted.text = if (todo.completed) Constantes.COMPLETED else Constantes.NOT_COMPLETED
     }
 }

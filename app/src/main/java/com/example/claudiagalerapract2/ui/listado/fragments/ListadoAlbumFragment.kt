@@ -40,7 +40,7 @@ class ListadoAlbumFragment : Fragment() {
     private fun observarState() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.albums)
-            binding.lista?.visibility = View.VISIBLE
+            binding.lista.visibility = View.VISIBLE
         }
     }
 
@@ -54,8 +54,8 @@ class ListadoAlbumFragment : Fragment() {
                 }
             })
 
-        binding.lista?.layoutManager = LinearLayoutManager(activity)
-        binding.lista?.adapter = adapter
+        binding.lista.layoutManager = LinearLayoutManager(activity)
+        binding.lista.adapter = adapter
     }
 
     override fun onDestroyView() {

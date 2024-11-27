@@ -53,8 +53,8 @@ class ListadoTodoFragment : Fragment() {
                 }
             })
 
-        binding.lista?.layoutManager = LinearLayoutManager(activity)
-        binding.lista?.adapter = adapter
+        binding.lista.layoutManager = LinearLayoutManager(activity)
+        binding.lista.adapter = adapter
     }
 
 

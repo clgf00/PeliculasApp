@@ -8,19 +8,23 @@ import com.example.claudiagalerapract2.R
 import com.example.claudiagalerapract2.domain.modelo.Photo
 import com.example.claudiagalerapract2.ui.listado.viewholder.PhotoItemViewHolder
 
-class PhotoAdapter (
+class PhotoAdapter(
     val actions: PhotoActions
 ) : ListAdapter<Photo, PhotoItemViewHolder>(DiffCallback()) {
 
+    private val selectedItems = mutableSetOf<Photo>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoItemViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_detalle_photo, parent, false)
+            .inflate(R.layout.cardview_photo, parent, false)
         return PhotoItemViewHolder(view, actions)
     }
 
     override fun onBindViewHolder(holder: PhotoItemViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+        holder.itemView.isSelected = selectedItems.contains(item)
+
     }
 
     override fun getItemCount(): Int {
@@ -39,6 +43,5 @@ class PhotoAdapter (
 
     interface PhotoActions {
         fun onItemClick(photo: Photo)
-
     }
 }

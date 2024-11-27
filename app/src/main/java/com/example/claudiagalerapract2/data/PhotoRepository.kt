@@ -32,6 +32,19 @@ class PhotoRepository@Inject constructor(
             return error(e.message ?: e.toString())
         }
     }
+
+    suspend fun deletePhoto(id: Int): NetworkResult<Unit> {
+        return try {
+            val response = photoService.delete(id)
+            if (response.isSuccessful) {
+                return NetworkResult.Success(Unit)
+            }
+            error("${response.code()} ${response.message()}")
+        } catch (e: Exception) {
+            error(e.message ?: e.toString())
+        }
+    }
+
     private fun <T> error(errorMessage: String): NetworkResult<T> =
         NetworkResult.Error("Api call failed $errorMessage")
 

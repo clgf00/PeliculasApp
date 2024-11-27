@@ -40,26 +40,8 @@
             android:name="postId"
             app:argType="integer" />
         <action
-            android:id="@+id/action_detalleFragmentPost_to_listadoCommentFragment"
-            app:destination="@id/listadoCommentFragment">
-            <argument
-                android:name="postId"
-                app:argType="integer" />
-        </action>
-    </fragment>
-
-    <fragment
-        android:id="@+id/listadoCommentFragment"
-        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoCommentFragment"
-        android:label="Listado de Comentarios"
-        tools:layout="@layout/fragment_listado_comments">
-        <action
-            android:id="@+id/action_listadoCommentFragment_to_detalleFragmentComment"
-            app:destination="@id/detalleFragmentComment">
-            <argument
-                android:name="commentId"
-                app:argType="integer" />
-        </action>
+            android:id="@+id/action_detalleFragmentPost_to_detalleFragmentComment"
+            app:destination="@id/detalleFragmentComment" />
     </fragment>
 
     <fragment
@@ -95,26 +77,8 @@
             android:name="albumId"
             app:argType="integer" />
         <action
-            android:id="@+id/action_detalleFragmentAlbum_to_listadoPhotoFragment"
-            app:destination="@id/listadoPhotoFragment">
-            <argument
-                android:name="albumId"
-                app:argType="integer" />
-        </action>
-    </fragment>
-
-    <fragment
-        android:id="@+id/listadoPhotoFragment"
-        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoPhotoFragment"
-        android:label="Listado de Fotos"
-        tools:layout="@layout/fragment_listado_photo">
-        <action
-            android:id="@+id/action_listadoPhotoFragment_to_detalleFragmentPhoto"
-            app:destination="@id/detalleFragmentPhoto">
-            <argument
-                android:name="photoId"
-                app:argType="integer" />
-        </action>
+            android:id="@+id/action_detalleFragmentAlbum_to_detalleFragmentPhoto"
+            app:destination="@id/detalleFragmentPhoto" />
     </fragment>
 
     <fragment

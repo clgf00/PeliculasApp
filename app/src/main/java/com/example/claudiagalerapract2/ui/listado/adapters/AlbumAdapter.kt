@@ -14,7 +14,7 @@ class AlbumAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumItemViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_view_album, parent, false)
+            .inflate(R.layout.cardview_post, parent, false)
         return AlbumItemViewHolder(view, actions)
     }
 
@@ -39,6 +39,5 @@ class AlbumAdapter (
 
     interface AlbumActions {
         fun onItemClick(album: Album)
-
     }
 }

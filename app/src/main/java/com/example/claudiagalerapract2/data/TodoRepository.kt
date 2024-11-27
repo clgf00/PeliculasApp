@@ -33,6 +33,47 @@ class TodoRepository @Inject constructor(
             return error(e.message ?: e.toString())
         }
     }
+
+    suspend fun addTodo(todo: Todo): NetworkResult<Todo> {
+        return try {
+            val response = todoService.add(todo)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return NetworkResult.Success(it)
+                }
+            }
+            error("${response.code()} ${response.message()}")
+        } catch (e: Exception) {
+            error(e.message ?: e.toString())
+        }
+    }
+
+    suspend fun updateTodo(id: Int, todo: String): NetworkResult<Todo> {
+        return try {
+            val response = todoService.update(id, todo)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return NetworkResult.Success(it)
+                }
+            }
+            error("${response.code()} ${response.message()}")
+        } catch (e: Exception) {
+            error(e.message ?: e.toString())
+        }
+    }
+
+    suspend fun deleteTodo(id: Int): NetworkResult<Unit> {
+        return try {
+            val response = todoService.delete(id)
+            if (response.isSuccessful) {
+                return NetworkResult.Success(Unit)
+            }
+            error("${response.code()} ${response.message()}")
+        } catch (e: Exception) {
+            error(e.message ?: e.toString())
+        }
+    }
+
     private fun <T> error(errorMessage: String): NetworkResult<T> =
         NetworkResult.Error("Api call failed $errorMessage")
 

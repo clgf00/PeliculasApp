@@ -13,6 +13,7 @@ import com.example.claudiagalerapract2.domain.modelo.Photo
 import com.example.claudiagalerapract2.ui.listado.adapters.PhotoAdapter
 import com.example.claudiagalerapract2.ui.listado.events.ListadoPhotoEvent
 import com.example.claudiagalerapract2.ui.listado.viewmodel.ListadoPhotoViewModel
+import com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentAlbumDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +25,11 @@ class ListadoPhotoFragment : Fragment() {
 
     private lateinit var adapter: PhotoAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentListadoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,13 +54,15 @@ class ListadoPhotoFragment : Fragment() {
             actions = object : PhotoAdapter.PhotoActions {
                 override fun onItemClick(photo: Photo) {
                     val photoId = photo.id
-                    val action = ListadoPhotoFragmentDirections.actionListadoPhotoFragmentToDetalleFragmentPhoto(photoId)
+                    val action =
+                        DetalleFragmentAlbumDirections.actionDetalleFragmentAlbumToDetalleFragmentPhoto(photoId)
                     findNavController().navigate(action)
                 }
             })
-
-        binding.listaUsers?.layoutManager = LinearLayoutManager(activity)
-        binding.listaUsers?.adapter = adapter
+        binding.lista.apply {
+            binding.lista.layoutManager = LinearLayoutManager(activity)
+            adapter = this@ListadoPhotoFragment.adapter
+        }
     }
 
     override fun onDestroyView() {

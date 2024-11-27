@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.claudiagalerapract2.databinding.FragmentDetallePhotoBinding
+import com.example.claudiagalerapract2.ui.common.Constantes
 import com.example.claudiagalerapract2.ui.pantalladetalle.state.DetallePhotoState
 import com.example.claudiagalerapract2.ui.pantalladetalle.viewmodel.DetallePhotoViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,20 +26,23 @@ class DetalleFragmentPhoto : Fragment() {
 
     private val args: DetalleFragmentPhotoArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentDetallePhotoBinding.inflate(inflater, container, false)
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View {
+            _binding = FragmentDetallePhotoBinding.inflate(inflater, container, false)
+            val photoId = args.photoId
+            observarViewModel()
+            viewModel.cambiarPhoto(photoId)
 
-        val photoId = args.photoId
+            binding.deletePhotoButton.setOnClickListener {
+                viewModel.eliminarPhoto(photoId)
+                Toast.makeText(requireContext(), Constantes.ELIMINADO, Toast.LENGTH_SHORT).show()
+                findNavController().navigateUp()
+            }
 
-        observarViewModel()
-
-        viewModel.cambiarPhoto(photoId)
-
-        return binding.root
-    }
+            return binding.root
+        }
 
     private fun observarViewModel() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
@@ -54,7 +59,7 @@ class DetalleFragmentPhoto : Fragment() {
 
     private fun setPhoto(state: DetallePhotoState) {
         state.photo?.let { photo ->
-            binding.photoTitleTextView.text = photo.title
+            binding.photoTitleEditText.setText(photo.title)
             binding.photoImageView.load(photo.url) {
                 crossfade(true)
             }

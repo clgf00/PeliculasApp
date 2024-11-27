@@ -13,6 +13,7 @@ import com.example.claudiagalerapract2.domain.modelo.Comment
 import com.example.claudiagalerapract2.ui.listado.adapters.CommentAdapter
 import com.example.claudiagalerapract2.ui.listado.events.ListadoCommentEvent
 import com.example.claudiagalerapract2.ui.listado.viewmodel.ListadoCommentViewModel
+import com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentPostDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,7 +41,7 @@ class ListadoCommentFragment : Fragment() {
     private fun observarState() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.comments)
-            binding.listaUsers?.visibility = View.VISIBLE
+            binding.lista.visibility = View.VISIBLE
         }
     }
 
@@ -49,13 +50,13 @@ class ListadoCommentFragment : Fragment() {
             actions = object : CommentAdapter.CommentActions {
                 override fun onItemClick(comment: Comment) {
                     val commentId = comment.id
-                    val action = ListadoCommentFragmentDirections.actionListadoCommentFragmentToDetalleFragmentComment(commentId)
+                    val action = DetalleFragmentPostDirections.actionDetalleFragmentPostToDetalleFragmentComment(comment.id)
                     findNavController().navigate(action)
                 }
             })
 
-        binding.listaUsers?.layoutManager = LinearLayoutManager(activity)
-        binding.listaUsers?.adapter = adapter
+        binding.lista.layoutManager = LinearLayoutManager(activity)
+        binding.lista.adapter = adapter
     }
 
     override fun onDestroyView() {

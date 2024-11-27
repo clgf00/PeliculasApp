@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.claudiagalerapract2.databinding.ActivityLoginBinding
+import com.example.claudiagalerapract2.ui.common.Constantes
 import com.example.claudiagalerapract2.ui.pantallamain.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
             if (username.isNotEmpty()) {
                 loginUser(username.toInt())
             } else {
-                Toast.makeText(this, "Por favor ingresa un nombre de usuario", Toast.LENGTH_SHORT)
+                Toast.makeText(this, Constantes.INTRODUCE_USUARIO, Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -60,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
             if (user != null) {
                 navigateToMain(id)
             } else {
-                Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, Constantes.NO_ENCONTRADO, Toast.LENGTH_SHORT).show()
             }
         }
     }

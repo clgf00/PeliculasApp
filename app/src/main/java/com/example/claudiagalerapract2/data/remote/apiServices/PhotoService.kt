@@ -1,7 +1,9 @@
 package com.example.claudiagalerapract2.data.remote.apiServices
 
 import com.example.claudiagalerapract2.data.remote.di.modelo.PhotoRemote
+import com.example.claudiagalerapract2.domain.modelo.Photo
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -16,14 +18,11 @@ interface PhotoService {
     @GET("/photos/{id}")
     suspend fun get(@Path("id") key: Int): Response<PhotoRemote>
 
+    @GET("/albums/{albumId}/photos")
+    suspend fun getPhotosForAlbum(@Path("albumId") albumId: Int): Response<List<PhotoRemote>>
+
 
     @DELETE("/photos/{id}")
     suspend fun delete(@Path("id") key: Int): Response<Unit>
 
-
-    @POST("/photos/{id}")
-    suspend fun add(@Path("id") key: Int): Response<Unit>
-
-    @PUT("/photos/{id}")
-    suspend fun update(@Path("id") key: Int): Response<Unit>
 }
