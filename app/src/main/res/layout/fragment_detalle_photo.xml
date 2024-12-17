@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ui.pantalladetalle.fragments.DetalleFragmentPhoto">
+    tools:context=".ui.photo.detalle.DetalleFragmentPhoto">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/photo_title_edit_text"

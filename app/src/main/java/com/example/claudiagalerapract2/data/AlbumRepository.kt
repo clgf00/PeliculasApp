@@ -32,33 +32,6 @@ class AlbumRepository@Inject constructor(
         }
     }
 
-    suspend fun addAlbum(album: Album): NetworkResult<Album> {
-        return try {
-            val response = albumService.add(album)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    return NetworkResult.Success(it)
-                }
-            }
-            error("${response.code()} ${response.message()}")
-        } catch (e: Exception) {
-            error(e.message ?: e.toString())
-        }
-    }
-
-    suspend fun updateAlbum(id: Int, album: Album): NetworkResult<Album> {
-        return try {
-            val response = albumService.update(id, album)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    return NetworkResult.Success(it)
-                }
-            }
-            error("${response.code()} ${response.message()}")
-        } catch (e: Exception) {
-            error(e.message ?: e.toString())
-        }
-    }
     suspend fun deleteAlbum(id: Int): NetworkResult<Unit> {
         return try {
             val response = albumService.delete(id)

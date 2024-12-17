@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/listadoTodoFragment"
-        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoTodoFragment"
+        android:name="com.example.claudiagalerapract2.ui.todo.listado.ListadoTodoFragment"
         android:label="Listado de Todos"
         tools:layout="@layout/fragment_listado_todos">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/listadoPostFragment"
-        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoPostFragment"
+        android:name="com.example.claudiagalerapract2.ui.post.listado.ListadoPostFragment"
         android:label="Listado de Posts"
         tools:layout="@layout/fragment_listado_posts">
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/detalleFragmentPost"
-        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentPost"
+        android:name="com.example.claudiagalerapract2.ui.post.detalle.DetalleFragmentPost"
         android:label="Detalle de Post"
         tools:layout="@layout/fragment_detalle_post">
         <argument
@@ -46,7 +46,7 @@
 
     <fragment
         android:id="@+id/detalleFragmentComment"
-        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentComment"
+        android:name="com.example.claudiagalerapract2.ui.comment.detalle.DetalleFragmentComment"
         android:label="Detalle de Comentario"
         tools:layout="@layout/fragment_detalle_comment">
         <argument
@@ -56,7 +56,7 @@
 
     <fragment
         android:id="@+id/listadoAlbumFragment"
-        android:name="com.example.claudiagalerapract2.ui.listado.fragments.ListadoAlbumFragment"
+        android:name="com.example.claudiagalerapract2.ui.album.listado.ListadoAlbumFragment"
         android:label="Listado de Álbumes"
         tools:layout="@layout/fragment_listado_album">
         <action
@@ -70,7 +70,7 @@
 
     <fragment
         android:id="@+id/detalleFragmentAlbum"
-        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentAlbum"
+        android:name="com.example.claudiagalerapract2.ui.album.detalle.DetalleFragmentAlbum"
         android:label="Detalle de Álbum"
         tools:layout="@layout/fragment_detalle_album">
         <argument
@@ -83,7 +83,7 @@
 
     <fragment
         android:id="@+id/detalleFragmentPhoto"
-        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentPhoto"
+        android:name="com.example.claudiagalerapract2.ui.photo.detalle.DetalleFragmentPhoto"
         android:label="Detalle de Foto"
         tools:layout="@layout/fragment_detalle_photo">
         <argument
@@ -93,7 +93,7 @@
 
     <fragment
         android:id="@+id/detalleFragmentTodo"
-        android:name="com.example.claudiagalerapract2.ui.pantalladetalle.fragments.DetalleFragmentTodo"
+        android:name="com.example.claudiagalerapract2.ui.todo.detalle.DetalleFragmentTodo"
         android:label="Detalle de Todo"
         tools:layout="@layout/fragment_detalle_todo">
         <argument

@@ -3,8 +3,11 @@ package com.example.claudiagalerapract2.data
 import com.example.claudiagalerapract2.data.remote.apiServices.PhotoService
 import com.example.claudiagalerapract2.data.remote.di.dataSource.GalleryRemoteDataSource
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
+import com.example.claudiagalerapract2.data.remote.di.modelo.toCommentDetail
 import com.example.claudiagalerapract2.data.remote.di.modelo.toPhotoDetail
+import com.example.claudiagalerapract2.domain.modelo.Comment
 import com.example.claudiagalerapract2.domain.modelo.Photo
+import com.example.claudiagalerapract2.ui.common.Constantes
 import javax.inject.Inject
 
 class PhotoRepository@Inject constructor(
@@ -42,6 +45,15 @@ class PhotoRepository@Inject constructor(
             error("${response.code()} ${response.message()}")
         } catch (e: Exception) {
             error(e.message ?: e.toString())
+        }
+    }
+
+    suspend fun fetchPhotosByAlbums(albumId: Int): List<Photo> {
+        val response = photoService.getPhotosForAlbum(albumId)
+        if (response.isSuccessful) {
+            return response.body()?.map { it.toPhotoDetail() } ?: emptyList()
+        } else {
+            throw Exception(Constantes.ERROR_FETCH)
         }
     }
 

@@ -6,6 +6,7 @@ import com.example.claudiagalerapract2.data.remote.apiServices.CommentService
 import com.example.claudiagalerapract2.data.remote.apiServices.PhotoService
 import com.example.claudiagalerapract2.data.remote.apiServices.PostService
 import com.example.claudiagalerapract2.data.remote.apiServices.TodoService
+import com.example.claudiagalerapract2.data.remote.apiServices.UserService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

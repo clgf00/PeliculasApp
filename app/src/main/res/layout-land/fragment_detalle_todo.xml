@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".ui.pantalladetalle.fragments.DetalleFragmentTodo">
+        tools:context=".ui.todo.detalle.DetalleFragmentTodo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/todo_title"

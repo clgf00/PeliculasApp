@@ -3,15 +3,19 @@ package com.example.claudiagalerapract2.ui.pantallalogin
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.claudiagalerapract2.databinding.ActivityLoginBinding
 import com.example.claudiagalerapract2.ui.common.Constantes
 import com.example.claudiagalerapract2.ui.pantallamain.MainActivity
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -37,31 +41,29 @@ class LoginActivity : AppCompatActivity() {
             if (username.isNotEmpty()) {
                 loginUser(username.toInt())
             } else {
-                Toast.makeText(this, Constantes.INTRODUCE_USUARIO, Toast.LENGTH_SHORT)
-                    .show()
+                Snackbar.make(binding.root, Constantes.INTRODUCE_USUARIO, Snackbar.LENGTH_SHORT).show()
             }
         }
-
     }
 
     private fun navigateToMain(id: Int) {
         val intent = Intent(this, MainActivity::class.java)
-
-        // Puedes agregar datos extra si es necesario
         intent.putExtra("userId", id)
-
-        // Inicia la actividad
         startActivity(intent)
     }
 
     private fun loginUser(id: Int) {
         setLoadingState(true)
-        viewModel.login(id).observe(this) { user ->
-            setLoadingState(false)
-            if (user != null) {
-                navigateToMain(id)
-            } else {
-                Toast.makeText(this, Constantes.NO_ENCONTRADO, Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.login(id).collect { user ->
+                    setLoadingState(false)
+                    if (user != null) {
+                        navigateToMain(id)
+                    } else {
+                        Snackbar.make(binding.root, Constantes.NO_ENCONTRADO, Snackbar.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
@@ -70,6 +72,4 @@ class LoginActivity : AppCompatActivity() {
         binding.loadingSpinner.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.loginButton.isEnabled = !isLoading
     }
-
-
 }

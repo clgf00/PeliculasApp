@@ -5,8 +5,6 @@ object Constantes {
     const val APIKEY = "api_key"
     const val ERROR_FETCH = "Error fetching comments for post"
     const val CARGANDO = "Cargando..."
-    const val ANYADIENDO = "Agregando..."
-    const val ANYADIDO_EXITO = "Agregado exitosamente"
     const val ACTUALIZANDO = "Actualizando..."
     const val ACTUALIZADO_EXITO = "Actualizado"
     const val ELIMINANDO = "Eliminando..."

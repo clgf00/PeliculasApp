@@ -6,8 +6,6 @@
     <string name="agregar">+</string>
     <string name="eliminar">-</string>
     <string name="actualizar">⟳</string>
-    <string name="siguiente">⮕</string>
-    <string name="anterior">⬅</string>
     <string name="agregar2">Agregar</string>
     <string name="ir">IR</string>
     <string name="username">Username</string>
@@ -38,4 +36,8 @@
     <string name="poststitle">Posts</string>
     <string name="comment_title">comment title</string>
     <string name="top_app_bar">Top App Bar</string>
+    <string name="bot_n_de_inicio">Botón de inicio</string>
+    <string name="boton">BOTON</string>
+    <string name="buscar">Buscar</string>
+    <string name="search">SEARCH</string>
 </resources>

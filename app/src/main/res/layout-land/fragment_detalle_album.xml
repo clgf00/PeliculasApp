@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.pantalladetalle.fragments.DetalleFragmentAlbum">
+    tools:context=".ui.album.detalle.DetalleFragmentAlbum">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/album_title_edit_text"
