@@ -4,5 +4,5 @@ import com.example.claudiagalerapract2.data.UserRepository
 import javax.inject.Inject
 
 class GetUsers @Inject constructor(private val userRepository: UserRepository) {
-    suspend operator fun invoke() = userRepository.fetchUsers()
+    suspend operator fun invoke() = userRepository.fetchUserConFlow()
 }

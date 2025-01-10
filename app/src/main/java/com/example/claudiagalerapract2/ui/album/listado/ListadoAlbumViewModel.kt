@@ -2,15 +2,17 @@ package com.example.claudiagalerapract2.ui.album.listado
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.claudiagalerapract2.data.remote.di.di.IoDispatcher
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
-import com.example.claudiagalerapract2.domain.modelo.Album
 import com.example.claudiagalerapract2.domain.usecases.albums.DeleteAlbum
 import com.example.claudiagalerapract2.domain.usecases.albums.GetAlbums
 import com.example.claudiagalerapract2.ui.common.Constantes
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,6 +20,8 @@ import javax.inject.Inject
 class ListadoAlbumViewModel @Inject constructor(
     private val getAlbums: GetAlbums,
     private val deleteAlbum: DeleteAlbum,
+    @IoDispatcher val dispatcher: CoroutineDispatcher
+
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ListadoStateAlbum())
@@ -26,22 +30,19 @@ class ListadoAlbumViewModel @Inject constructor(
     init {
         handleEvent(ListadoAlbumEvent.GetAlbums)
     }
-
     private fun obtenerAlbums() {
         viewModelScope.launch {
-            when (val result = getAlbums()) {
-                is NetworkResult.Success -> {
-                    val albums = result.data ?: emptyList()
-                    _uiState.value = ListadoStateAlbum(albums = albums)
-
-                }
-
-                is NetworkResult.Error -> {
-                    _uiState.value = ListadoStateAlbum(error = Constantes.ERROR)
-                }
-
-                is NetworkResult.Loading -> {
-                    _uiState.value = ListadoStateAlbum(mensaje = Constantes.CARGANDO)
+            getAlbums().collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        _uiState.update { it.copy(albums = result.data, isLoading = false) }
+                    }
+                    is NetworkResult.Error -> {
+                        _uiState.update { it.copy(error = result.message ?: Constantes.ERROR, isLoading = false) }
+                    }
+                    is NetworkResult.Loading -> {
+                        _uiState.update { it.copy(isLoading = true) }
+                    }
                 }
             }
         }
@@ -56,11 +57,11 @@ class ListadoAlbumViewModel @Inject constructor(
                 }
 
                 is NetworkResult.Error -> {
-                    _uiState.value = ListadoStateAlbum(albums = emptyList())
+                    _uiState.update { it.copy(error = Constantes.ERROR, isLoading = false) }
                 }
 
                 is NetworkResult.Loading -> {
-                    _uiState.value = ListadoStateAlbum(albums = emptyList())
+                    _uiState.update { it.copy(isLoading = true) }
                 }
             }
         }
@@ -69,18 +70,28 @@ class ListadoAlbumViewModel @Inject constructor(
 
     private fun filtrarAlbums(query: String) {
         viewModelScope.launch {
-            val allAlbums = getAlbums().let {
-                if (it is NetworkResult.Success) it.data ?: emptyList() else emptyList()
+            getAlbums().collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        val allAlbums = result.data
+                        val filteredAlbums = if (query.isEmpty()) {
+                            allAlbums
+                        } else {
+                            allAlbums.filter { it.title.contains(query, ignoreCase = true) }
+                        }
+                        _uiState.update { it.copy(albums = filteredAlbums) }
+                    }
+                    is NetworkResult.Error -> {
+                        _uiState.update { it.copy(error = result.message, isLoading = false) }
+                    }
+                    is NetworkResult.Loading -> {
+                        _uiState.update { it.copy(isLoading = true) }
+                    }
+                }
             }
-            val filteredAlbums = if (query.isEmpty()) {
-                allAlbums
-            } else {
-                allAlbums.filter { it.title.contains(query, ignoreCase = true) }
-            }
-
-            _uiState.value = ListadoStateAlbum(albums = filteredAlbums)
         }
     }
+
 
 
     fun handleEvent(event: ListadoAlbumEvent) {

@@ -25,10 +25,6 @@ interface CommentService {
     @GET("/posts/{postId}/comments")
     suspend fun getCommentsByPost(@Path("postId") postId: Int): Response<List<CommentRemote>>
 
-
-    @POST("/comments/{id}")
-    suspend fun add(@Body comment: Comment): Response<Comment>
-
     @PUT("/comments/{id}")
     suspend fun update(@Path("id") id: Int, @Body comment: Comment): Response<Comment>
 

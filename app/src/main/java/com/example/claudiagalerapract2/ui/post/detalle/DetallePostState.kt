@@ -9,4 +9,5 @@ data class DetallePostState(
     val posts: List<Post> = emptyList(),
     val comments: List<Comment> = emptyList(),
     val mensaje: String? = null,
+    val isLoading : Boolean = false,
 )

@@ -62,7 +62,6 @@ class DetalleFragmentTodo : Fragment() {
                         Snackbar.make(requireView(), error, Snackbar.LENGTH_SHORT).show()
                         viewModel.errorMostrado()
                     }
-
                     state.todo?.let { todo ->
                         setTodo(todo)
                     }

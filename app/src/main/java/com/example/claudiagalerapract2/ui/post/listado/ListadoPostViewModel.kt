@@ -3,12 +3,13 @@ package com.example.claudiagalerapract2.ui.post.listado
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
-import com.example.claudiagalerapract2.domain.usecases.posts.DeletePost
 import com.example.claudiagalerapract2.domain.usecases.posts.GetPosts
+import com.example.claudiagalerapract2.ui.common.Constantes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,28 +27,54 @@ class ListadoPostViewModel @Inject constructor(
     }
 
 
-
-    private fun filtrarPosts(query: String) {
+    fun filtrarPosts(query: String) {
         viewModelScope.launch {
-            val allPosts = getPosts().let {
-                if (it is NetworkResult.Success) it.data ?: emptyList() else emptyList()
+            getPosts().collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        val allPosts = result.data ?: emptyList()
+                        val filteredPosts = if (query.isEmpty()) {
+                            allPosts
+                        } else {
+                            allPosts.filter { it.title.contains(query, ignoreCase = true) }
+                        }
+                        _uiState.update { it.copy(posts = filteredPosts) }
+                    }
+                    is NetworkResult.Error -> {
+                        _uiState.update { it.copy(error = result.message ?: Constantes.ERROR, posts = emptyList()) }
+                    }
+                    is NetworkResult.Loading -> {
+                        _uiState.update { it.copy(isLoading = true) }
+                    }
+                }
             }
-            val filteredPosts = if (query.isEmpty()) {
-                allPosts
-            } else {
-                allPosts.filter { it.title.contains(query, ignoreCase = true) }
-            }
-
-            _uiState.value = ListadoStatePost(posts = filteredPosts)
         }
     }
 
+    private fun obtenerPosts() {
+        viewModelScope.launch {
+            getPosts().collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        _uiState.update { it.copy(result.data, isLoading = false) }
+                    }
 
+                    is NetworkResult.Error -> {
+                        _uiState.update { it.copy(error = result.message, isLoading = false) }
+                    }
 
-    fun handleEvent(event:ListadoPostEvent) {
+                    is NetworkResult.Loading -> {
+                        _uiState.update { it.copy(isLoading = true, mensaje = Constantes.CARGANDO) }
+                    }
+                }
+            }
+        }
+    }
+
+    fun handleEvent(event: ListadoPostEvent) {
         when (event) {
             is ListadoPostEvent.FilterPosts -> filtrarPosts(event.query)
-            ListadoPostEvent.GetPosts -> getPosts
+            ListadoPostEvent.GetPosts -> obtenerPosts()
         }
     }
 }

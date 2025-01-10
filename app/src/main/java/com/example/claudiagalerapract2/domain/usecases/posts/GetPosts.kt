@@ -4,5 +4,5 @@ import com.example.claudiagalerapract2.data.PostRepository
 import javax.inject.Inject
 
 class GetPosts @Inject constructor(private val postRepository: PostRepository) {
-    suspend operator fun invoke() = postRepository.fetchPosts()
+    suspend operator fun invoke() = postRepository.fetchPostsConFlow()
 }

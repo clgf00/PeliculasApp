@@ -5,5 +5,6 @@ import com.example.claudiagalerapract2.domain.modelo.Post
 data class ListadoStatePost (
     val posts : List<Post> = emptyList(),
     val error : String = "",
-    val mensaje : String = ""
+    val mensaje : String = "",
+    val isLoading : Boolean= false
 )

@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstApp"
-        tools:targetApi="31">
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="tiramisu">
+
         <activity
             android:name=".ui.pantallalogin.LoginActivity"
             android:exported="true" >
@@ -29,7 +31,9 @@
             android:name=".ui.pantallamain.MainActivity"
             android:exported="true" >
         </activity>
-
+        <activity
+            android:name=".ui.pantallalogin.RegisterActivity"
+            android:exported="true">
+        </activity>
     </application>
-
 </manifest>

@@ -24,9 +24,6 @@ interface PostService {
     suspend fun delete(@Path("id") key: Int): Response<Unit>
 
 
-    @POST("/posts/{id}")
-    suspend fun add(@Body post: Post): Response<Post>
-
     @PUT("/posts/{id}")
     suspend fun update(@Path("id") id: Int, @Body post: Post): Response<Post>
 }

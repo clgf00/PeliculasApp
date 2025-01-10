@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class DetalleAlbumViewModel @Inject constructor(
     private val getAlbum: GetAlbum,
     private val getAlbums: GetAlbums,
-    private val getAlbumPhotos : GetAlbumPhotos,
+    private val getAlbumPhotos: GetAlbumPhotos,
     private val deleteAlbum: DeleteAlbum,
 
     ) : ViewModel() {
@@ -35,9 +36,9 @@ class DetalleAlbumViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val photos = getAlbumPhotos(albumId)
-                _uiState.value = _uiState.value.copy(photos = photos)
+                _uiState.update { it.copy(photos = photos) }
             } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(mensaje = Constantes.ERROR)
+                _uiState.update { it.copy(error = Constantes.ERROR) }
             }
         }
     }
@@ -46,16 +47,16 @@ class DetalleAlbumViewModel @Inject constructor(
         viewModelScope.launch {
             when (val result = getAlbum(id)) {
                 is NetworkResult.Success -> {
-                    _uiState.value = _uiState.value.copy(album = result.data)
+                    _uiState.update { it.copy(album = result.data, isLoading = false) }
                     obtenerPhotos(id)
                 }
 
                 is NetworkResult.Error -> {
-                    _uiState.value = _uiState.value.copy(mensaje = Constantes.ERROR)
+                    _uiState.update { it.copy(error = Constantes.ERROR, isLoading = false) }
                 }
 
                 is NetworkResult.Loading -> {
-                    _uiState.value = _uiState.value.copy(mensaje = Constantes.CARGANDO)
+                    _uiState.update { it.copy(isLoading = true, mensaje = Constantes.CARGANDO) }
                 }
             }
         }
@@ -64,25 +65,27 @@ class DetalleAlbumViewModel @Inject constructor(
     private fun filtrarPhotos(query: String) {
         viewModelScope.launch {
             val photosFiltradas = _uiState.value.photos.filter {
-                it.title.contains(query, ignoreCase = true) }
-            _uiState.value = _uiState.value.copy(photos = photosFiltradas)
+                it.title.contains(query, ignoreCase = true)
+            }
+            _uiState.update { it.copy(photos = photosFiltradas) }
         }
     }
 
 
     fun eliminarAlbum(id: Int) {
         viewModelScope.launch {
-            _uiState.value = _uiState.value.copy(mensaje = Constantes.ELIMINANDO)
+            _uiState.update { it.copy(mensaje = Constantes.ELIMINANDO) }
             when (deleteAlbum(id)) {
                 is NetworkResult.Success -> {
-                    _uiState.value = _uiState.value.copy(mensaje = Constantes.ELIMINADO)
+                    obtenerPhotos(id)
                 }
 
                 is NetworkResult.Error -> {
-                    _uiState.value = _uiState.value.copy(mensaje = Constantes.ERROR)
+                    _uiState.update { it.copy(error= Constantes.ERROR, isLoading = false)}
                 }
 
                 is NetworkResult.Loading -> {
+                    _uiState.update { it.copy(isLoading = true)}
                 }
             }
         }

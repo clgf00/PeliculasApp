@@ -3,7 +3,6 @@ package com.example.claudiagalerapract2.ui.post.detalle
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -25,11 +24,8 @@ import com.example.claudiagalerapract2.R
 import com.example.claudiagalerapract2.databinding.FragmentDetallePostBinding
 import com.example.claudiagalerapract2.domain.modelo.Comment
 import com.example.claudiagalerapract2.domain.modelo.Post
-import com.example.claudiagalerapract2.ui.comment.detalle.DetalleCommentEvent
 import com.example.claudiagalerapract2.ui.comment.listado.CommentAdapter
-import com.example.claudiagalerapract2.ui.comment.listado.ListadoCommentEvent
 import com.example.claudiagalerapract2.ui.pantallamain.MainActivity
-import com.example.claudiagalerapract2.ui.post.listado.DetallePostEvent
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

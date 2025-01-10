@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
 import com.example.claudiagalerapract2.domain.modelo.Comment
-import com.example.claudiagalerapract2.domain.usecases.comments.AddComment
 import com.example.claudiagalerapract2.domain.usecases.comments.DeleteComment
 import com.example.claudiagalerapract2.domain.usecases.comments.GetComment
 import com.example.claudiagalerapract2.domain.usecases.comments.GetComments
@@ -14,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,7 +22,6 @@ class DetalleCommentViewModel @Inject constructor(
     private val getComment: GetComment,
     private val getComments: GetComments,
     private val deleteComment: DeleteComment,
-    private val addComment: AddComment,
     private val updateComment: UpdateComment
 ) : ViewModel() {
 
@@ -33,43 +32,26 @@ class DetalleCommentViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(mensaje = null)
     }
 
-    private fun agregarComment(comment: Comment) {
-        viewModelScope.launch {
-            when (addComment(comment)) {
-                is NetworkResult.Success -> {
-                    obtenerComments()
-                }
-
-                is NetworkResult.Error -> {
-                    _uiState.value = DetalleCommentState(comments = emptyList())
-                }
-
-                is NetworkResult.Loading -> {
-                    _uiState.value = DetalleCommentState(comments = emptyList())
-                }
-            }
-        }
-    }
-
     private fun obtenerComments() {
         viewModelScope.launch {
-            when (val result = getComments()) {
-                is NetworkResult.Success -> {
-                    val comments = result.data ?: emptyList()
-                    _uiState.value = DetalleCommentState(comments = comments)
+            getComments().collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        _uiState.update { it.copy(comments = result.data, isLoading = false) }
+                    }
 
-                }
+                    is NetworkResult.Error -> {
+                        _uiState.update { it.copy(error = Constantes.ERROR, isLoading = false) }
+                    }
 
-                is NetworkResult.Error -> {
-                    _uiState.value = DetalleCommentState(comments = emptyList())
-                }
-
-                is NetworkResult.Loading -> {
-                    _uiState.value = DetalleCommentState(comments = emptyList())
+                    is NetworkResult.Loading -> {
+                        _uiState.update { it.copy(isLoading = true, mensaje = Constantes.CARGANDO) }
+                    }
                 }
             }
         }
     }
+
 
     private fun eliminarComment(commentId: Int) {
         viewModelScope.launch {
@@ -79,11 +61,11 @@ class DetalleCommentViewModel @Inject constructor(
                 }
 
                 is NetworkResult.Error -> {
-                    _uiState.value = DetalleCommentState(comments = emptyList())
+                    _uiState.update { it.copy(error= Constantes.ERROR)}
                 }
 
                 is NetworkResult.Loading -> {
-                    _uiState.value = DetalleCommentState(comments = emptyList())
+                    _uiState.update { it.copy(isLoading = true, mensaje = Constantes.CARGANDO)}
                 }
             }
         }
@@ -97,11 +79,11 @@ class DetalleCommentViewModel @Inject constructor(
                 }
 
                 is NetworkResult.Error -> {
-                    _uiState.value = DetalleCommentState(comments = emptyList())
+                    _uiState.update { it.copy(error = Constantes.ERROR, isLoading = false)}
                 }
 
                 is NetworkResult.Loading -> {
-                    _uiState.value = DetalleCommentState(comments = emptyList())
+                    _uiState.update { it.copy(isLoading = true, mensaje = Constantes.CARGANDO)}
                 }
             }
         }
@@ -109,16 +91,25 @@ class DetalleCommentViewModel @Inject constructor(
 
     private fun filtrarComments(query: String) {
         viewModelScope.launch {
-            val allComments = getComments().let {
-                if (it is NetworkResult.Success) it.data ?: emptyList() else emptyList()
+            getComments().collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        val allComments = result.data
+                        val filteredComments = if (query.isEmpty()) {
+                            allComments
+                        } else {
+                            allComments.filter { it.name.contains(query, ignoreCase = true) }
+                        }
+                        _uiState.update { it.copy(comments = filteredComments) }
+                    }
+                    is NetworkResult.Error -> {
+                        _uiState.update { it.copy(error = result.message, isLoading = false) }
+                    }
+                    is NetworkResult.Loading -> {
+                        _uiState.update { it.copy(isLoading = true, mensaje = Constantes.CARGANDO) }
+                    }
+                }
             }
-            val filteredComments = if (query.isEmpty()) {
-                allComments
-            } else {
-                allComments.filter { it.name.contains(query, ignoreCase = true) }
-            }
-
-            _uiState.value = DetalleCommentState(comments = filteredComments)
         }
     }
 
@@ -127,15 +118,15 @@ class DetalleCommentViewModel @Inject constructor(
         viewModelScope.launch {
             when (val result = getComment(id)) {
                 is NetworkResult.Success -> {
-                    _uiState.value = _uiState.value.copy(comment = result.data)
+                    _uiState.update { it.copy(comment = result.data, isLoading = false)}
                 }
 
                 is NetworkResult.Error -> {
-                    _uiState.value = _uiState.value.copy(mensaje = Constantes.ERROR)
+                    _uiState.update { it.copy(error = Constantes.ERROR, isLoading = false)}
                 }
 
                 is NetworkResult.Loading -> {
-                    _uiState.value = _uiState.value.copy(mensaje = Constantes.CARGANDO)
+                    _uiState.update { it.copy(isLoading = true, mensaje = Constantes.CARGANDO)}
                 }
             }
         }
@@ -143,26 +134,9 @@ class DetalleCommentViewModel @Inject constructor(
 
     fun handleEvent(event: DetalleCommentEvent) {
         when (event) {
-            is DetalleCommentEvent.AddComment -> {
-                val name = ""
-                val email = ""
-
-                val newComment = Comment(
-                    name = name,
-                    email = email,
-                    body = event.newCommentContent
-                )
-                agregarComment(newComment)
-            }
             is DetalleCommentEvent.DeleteComment -> eliminarComment(event.commentId)
             is DetalleCommentEvent.UpdateComment -> {
-                val updatedComment = Comment(
-                    postId = 0,
-                    id = event.commentId,
-                    name = "",
-                    email = "",
-                    body = event.updatedContent //
-                )
+                val updatedComment = Comment(postId = 0, id = event.commentId, name = "", email = "", body = event.updatedContent)
                 actualizarComment(event.commentId, updatedComment)
             }
 

@@ -11,14 +11,12 @@ data class TodoRemote (
 
 fun TodoRemote.toTodo() =
     Todo(
-        userId = userId,
         id = id,
         title = title,
         completed = completed
     )
 fun TodoRemote.toTodoDetail() =
     Todo(
-        userId = userId,
         id = id,
         title = title,
         completed = completed

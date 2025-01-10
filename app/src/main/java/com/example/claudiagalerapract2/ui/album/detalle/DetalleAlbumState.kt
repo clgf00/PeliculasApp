@@ -7,4 +7,6 @@ data class DetalleAlbumState (
     val album: Album? = Album(),
     val photos : List<Photo> = emptyList(),
     val mensaje: String? = null,
+    val error : String = "",
+    val isLoading : Boolean = false,
 )

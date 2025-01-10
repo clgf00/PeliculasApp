@@ -8,7 +8,6 @@ data class UserRemote(
     val name : String,
     val username : String,
     val email: String,
-    val address: Address,
     val phone : String
 )
 
@@ -17,7 +16,6 @@ fun UserRemote.toUser() =
         id = id,
         name = name,
         email = email,
-        address = address,
         phone = phone
     )
 fun UserRemote.toUserDetail() =
@@ -26,6 +24,5 @@ fun UserRemote.toUserDetail() =
         name = name,
         username = name,
         email = email,
-        address = address,
         phone = phone
     )

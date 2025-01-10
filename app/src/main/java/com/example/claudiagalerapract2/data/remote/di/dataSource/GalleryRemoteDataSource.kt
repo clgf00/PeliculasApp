@@ -31,34 +31,34 @@ class GalleryRemoteDataSource @Inject constructor(
 
 
 ) : BaseApiResponse() {
-    suspend fun fetchUsers(): NetworkResult<List<User>?> =
+    suspend fun fetchUsers(): NetworkResult<List<User>> =
         safeApiCall { userService.get() }.map { lista ->
-            lista?.map { it.toUser() }
+            lista.map { it.toUser() }
         }
 
-    suspend fun fetchPhotos(): NetworkResult<List<Photo>?> =
+    suspend fun fetchPhotos(): NetworkResult<List<Photo>> =
         safeApiCall { photoService.get() }.map { lista ->
-            lista?.map { it.toPhoto() }
+            lista.map { it.toPhoto() }
         }
 
-    suspend fun fetchAlbums(): NetworkResult<List<Album>?> =
+    suspend fun fetchAlbums(): NetworkResult<List<Album>> =
         safeApiCall { albumService.getAll() }.map { lista ->
-            lista?.map { it.toAlbum() }
+            lista.map { it.toAlbum() }
         }
 
-    suspend fun fetchComments(): NetworkResult<List<Comment>?> =
+    suspend fun fetchComments(): NetworkResult<List<Comment>> =
         safeApiCall { commentService.get() }.map { lista ->
-            lista?.map { it.toComment() }
+            lista.map { it.toComment() }
         }
 
-    suspend fun fetchPosts(): NetworkResult<List<Post>?> =
+    suspend fun fetchPosts(): NetworkResult<List<Post>> =
         safeApiCall { postService.get() }.map { lista ->
-            lista?.map { it.toPost() }
+            lista.map { it.toPost() }
         }
 
-    suspend fun fetchTodos(): NetworkResult<List<Todo>?> =
+    suspend fun fetchTodos(): NetworkResult<List<Todo>> =
         safeApiCall { todoService.get() }.map { lista ->
-            lista?.map { it.toTodo() }
+            lista.map { it.toTodo() }
         }
 }
 

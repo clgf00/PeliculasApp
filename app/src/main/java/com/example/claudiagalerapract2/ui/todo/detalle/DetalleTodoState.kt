@@ -5,4 +5,6 @@ import com.example.claudiagalerapract2.domain.modelo.Todo
 data class DetalleTodoState (
     val todo: Todo? = Todo(),
     val mensaje: String? = null,
+    val error : String = "",
+    val isLoading: Boolean = false,
 )

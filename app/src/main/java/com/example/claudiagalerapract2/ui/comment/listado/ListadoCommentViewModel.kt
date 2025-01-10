@@ -4,15 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.claudiagalerapract2.data.remote.di.modelo.NetworkResult
 import com.example.claudiagalerapract2.domain.modelo.Comment
-import com.example.claudiagalerapract2.domain.usecases.comments.AddComment
 import com.example.claudiagalerapract2.domain.usecases.comments.DeleteComment
 import com.example.claudiagalerapract2.domain.usecases.comments.GetComments
 import com.example.claudiagalerapract2.domain.usecases.comments.UpdateComment
 import com.example.claudiagalerapract2.ui.album.listado.ListadoStateAlbum
+import com.example.claudiagalerapract2.ui.common.Constantes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,19 +32,24 @@ class ListadoCommentViewModel @Inject constructor(
 
     private fun obtenerComments() {
         viewModelScope.launch {
-            when (val result = getComments()) {
-                is NetworkResult.Success -> {
-                    val comments = result.data ?: emptyList()
-                    _uiState.value = ListadoStateComment(comments = comments)
+            getComments().collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        _uiState.update {
+                            it.copy(
+                                comments = result.data,
+                                isLoading = false
+                            )
+                        }
+                    }
 
-                }
+                    is NetworkResult.Error -> {
+                        _uiState.update { it.copy(error = Constantes.ERROR, isLoading = false) }
+                    }
 
-                is NetworkResult.Error -> {
-                    _uiState.value = ListadoStateComment(comments = emptyList())
-                }
-
-                is NetworkResult.Loading -> {
-                    _uiState.value = ListadoStateComment(comments = emptyList())
+                    is NetworkResult.Loading -> {
+                        _uiState.update { it.copy(isLoading = true, mensaje = Constantes.CARGANDO) }
+                    }
                 }
             }
         }
@@ -52,18 +58,28 @@ class ListadoCommentViewModel @Inject constructor(
 
     private fun filtrarComments(query: String) {
         viewModelScope.launch {
-            val allComments = getComments().let {
-                if (it is NetworkResult.Success) it.data ?: emptyList() else emptyList()
+            getComments().collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        val allComments = result.data
+                        val filteredComments = if (query.isEmpty()) {
+                            allComments
+                        } else {
+                            allComments.filter { it.name.contains(query, ignoreCase = true) }
+                        }
+                        _uiState.update { it.copy(comments = filteredComments) }
+                    }
+                    is NetworkResult.Error -> {
+                        _uiState.update { it.copy(error = result.message, isLoading = false) }
+                    }
+                    is NetworkResult.Loading -> {
+                        _uiState.update { it.copy(isLoading = true, mensaje = Constantes.CARGANDO) }
+                    }
+                }
             }
-            val filteredComments = if (query.isEmpty()) {
-                allComments
-            } else {
-                allComments.filter { it.name.contains(query, ignoreCase = true) }
-            }
-
-            _uiState.value = ListadoStateComment(comments = filteredComments)
         }
     }
+
 
     fun handleEvent(event: ListadoCommentEvent) {
         when (event) {

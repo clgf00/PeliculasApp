@@ -42,22 +42,12 @@
         android:layout_margin="8dp">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/addPostButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/add"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/deleteAlbumButton"
-            android:layout_marginEnd="8dp" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/deleteAlbumButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/eliminar"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/addPostButton"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/updatePostButton"
             android:layout_marginEnd="8dp" />
 

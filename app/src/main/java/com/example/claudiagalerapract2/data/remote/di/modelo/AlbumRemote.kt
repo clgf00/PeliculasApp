@@ -10,14 +10,12 @@ data class AlbumRemote (
 
 fun AlbumRemote.toAlbum() =
     Album(
-        userId = userId,
         id = id,
         title = title,
 
     )
 fun AlbumRemote.toAlbumDetail() =
     Album(
-        userId = userId,
         id = id,
         title = title,
 

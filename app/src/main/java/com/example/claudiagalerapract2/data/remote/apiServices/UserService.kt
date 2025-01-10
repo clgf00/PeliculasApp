@@ -18,17 +18,6 @@ interface UserService {
     suspend fun get(@Path("id") key: Int): Response<UserRemote>
 
 
-    @DELETE("/users/{id}")
-    suspend fun delete(@Path("id") key: Int): Response<Unit>
-
-
-    @POST("/users/{id}")
-    suspend fun add(@Path("id") key: Int): Response<Unit>
-
-    @PUT("/users/{id}")
-    suspend fun update(@Path("id") key: Int): Response<Unit>
-
-
 }
 
 

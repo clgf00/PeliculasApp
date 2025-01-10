@@ -36,13 +36,6 @@ class DetalleFragmentPhoto : Fragment() {
             val photoId = args.photoId
             observarViewModel()
             viewModel.cambiarPhoto(photoId)
-
-            binding.deletePhotoButton.setOnClickListener {
-                viewModel.eliminarPhoto(photoId)
-                Snackbar.make(requireView(), Constantes.ELIMINADO, Snackbar.LENGTH_SHORT).show()
-                findNavController().navigateUp()
-            }
-
             return binding.root
         }
 

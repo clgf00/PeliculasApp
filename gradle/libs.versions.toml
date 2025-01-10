@@ -22,6 +22,7 @@ coil = "2.6.0"
 cronetEmbedded = "119.6045.31"
 roomKtx = "2.6.1"
 filamentAndroid = "1.17.1" #imagenes
+roomRuntime = "2.6.1"
 
 [libraries]
 
@@ -50,6 +51,9 @@ coil = {module = "io.coil-kt:coil", version.ref = "coil"}
 cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", version.ref = "cronetEmbedded" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 filament-android = { group = "com.google.ar.sceneform", name = "filament-android", version.ref = "filamentAndroid" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+
 
 [bundles]
 retrofit = ["retrofit", "converter-gson", "converter-scalars", "logging-interceptor"]
@@ -63,3 +67,4 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 navigation-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
+room = { id="androidx.room", version.ref = "roomRuntime" }

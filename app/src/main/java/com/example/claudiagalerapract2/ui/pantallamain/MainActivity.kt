@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), MenuProvider {
 
         ActivityMainBinding.inflate(layoutInflater)
     }
-    private var userId by Delegates.notNull<Int>()
+    private var username by Delegates.notNull<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,18 +41,18 @@ class MainActivity : AppCompatActivity(), MenuProvider {
 
             val intent = intent
 
-            userId = intent.getIntExtra("userId", 1)
+            username = intent.getIntExtra("username", 1).toString()
             val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
             val navController = navHostFragment.navController
 
-            bottomAppBar?.setupWithNavController(navController)
+            bottomAppBar.setupWithNavController(navController)
 
             setSupportActionBar(topAppBar)
 
             setupActionBarWithNavController(navController)
 
-            topAppBar?.setNavigationOnClickListener {
+            topAppBar.setNavigationOnClickListener {
                 navController.navigateUp()
             }
         }

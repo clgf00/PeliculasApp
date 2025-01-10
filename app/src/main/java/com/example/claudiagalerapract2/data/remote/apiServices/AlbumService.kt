@@ -22,10 +22,4 @@ interface AlbumService {
 
     @DELETE("/albums/{id}")
     suspend fun delete(@Path("id") key: Int): Response<Unit>
-
-
-    @POST("/albums/{id}")
-    suspend fun add(@Body album: Album): Response<Album>
-
-    @PUT("/albums/{id}")
-    suspend fun update(@Path("id") id: Int, @Body album: Album): Response<Album>}
+}

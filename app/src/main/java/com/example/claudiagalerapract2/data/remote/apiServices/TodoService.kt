@@ -24,10 +24,6 @@ interface TodoService {
     @DELETE("/todos/{id}")
     suspend fun delete(@Path("id") key: Int): Response<Unit>
 
-
-    @POST("/todos/{id}")
-    suspend fun add(@Body todo: Todo): Response<Todo>
-
     @PUT("/todos/{id}")
     suspend fun update(@Path("id") id: Int, @Body todo: String): Response<Todo>
 
