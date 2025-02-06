@@ -3,9 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kapt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.navigation.safeargs.kotlin)
+    alias(libs.plugins.compose.compiler)
+
 }
 
 android {
@@ -24,7 +25,7 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
-
+        compose = true
     }
 
     buildTypes {
@@ -53,7 +54,6 @@ ksp {
 }
 
 dependencies {
-    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -70,12 +70,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation (libs.kotlin.stdlib)
     implementation (libs.kotlinx.serialization.json)
-
-
-
-
     implementation(libs.androidx.ui.tooling.preview.android)
     implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.foundation.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -87,6 +84,7 @@ dependencies {
 
     //hilt
     implementation(libs.hilt.core)
+    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
     //Logs
@@ -101,7 +99,6 @@ dependencies {
     //Librerias del viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation (libs.androidx.lifecycle.runtime.ktx.v220)
 
     //Fragments
     implementation(libs.androidx.navigation.fragment.ktx)
