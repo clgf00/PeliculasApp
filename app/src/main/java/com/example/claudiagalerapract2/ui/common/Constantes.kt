@@ -3,16 +3,24 @@ package com.example.claudiagalerapract2.ui.common
 object Constantes {
     const val ERROR = "Ha ocurrido un error"
     const val APIKEY = "api_key"
-    const val ERROR_FETCH = "Error fetching comments for post"
-    const val CARGANDO = "Cargando..."
-    const val EXITO = "Exito al registrar"
-    const val ACTUALIZADO_EXITO = "Actualizado"
-    const val ELIMINANDO = "Eliminando..."
-    const val ELIMINADO = "Eliminado"
-    const val COMPLETED = "Completed"
-    const val NOT_COMPLETED = "Not Completed"
     const val INTRODUCE_USUARIO = "Por favor ingresa un nombre de usuario"
-    const val INTRODUCE_DATOS_CORRECTOS ="Por favor, ingresa un nombre de usuario y una contraseña"
-    const val NO_ENCONTRADO = "Usuario no encontrado"
+    const val LOGIN = "Login"
+    const val USER = "Username"
+    const val PASS = "Password"
+    const val REGISTER = "Register"
+    const val LOGINF = "Login failed"
+    const val REGISTERS = "Register successful"
+    const val ALBUMS = "albums"
+    const val TODOS = "todos"
+    const val PHOTOS = "photos"
+    const val ALBUMTODOS = "Albums & Todos"
+    const val COMPLETED = "Completed"
+    const val PENDING = "Pending"
+
+
+
+
+
+
 
 }

@@ -19,7 +19,4 @@ interface AlbumService {
     @GET("/albums/{id}")
     suspend fun get(@Path("id") key: Int): Response<AlbumRemote>
 
-
-    @DELETE("/albums/{id}")
-    suspend fun delete(@Path("id") key: Int): Response<Unit>
 }

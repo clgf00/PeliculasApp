@@ -7,6 +7,5 @@ data class User(
     val password : String = "",
     var email: String = "",
     val phone : String="",
-
     )
 

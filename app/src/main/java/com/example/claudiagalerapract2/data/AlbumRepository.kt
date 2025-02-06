@@ -51,18 +51,6 @@ class AlbumRepository@Inject constructor(
         }
     }
 
-    suspend fun deleteAlbum(id: Int): NetworkResult<Unit> {
-        return try {
-            val response = albumService.delete(id)
-            if (response.isSuccessful) {
-                return NetworkResult.Success(Unit)
-            }
-            error("${response.code()} ${response.message()}")
-        } catch (e: Exception) {
-            error(e.message ?: e.toString())
-        }
-    }
-
     private fun <T> error(message: String): NetworkResult<T> =
         NetworkResult.Error(message)
 

@@ -20,12 +20,4 @@ interface TodoService {
     @GET("/todos/{id}")
     suspend fun get(@Path("id") key: Int): Response<TodoRemote>
 
-
-    @DELETE("/todos/{id}")
-    suspend fun delete(@Path("id") key: Int): Response<Unit>
-
-    @PUT("/todos/{id}")
-    suspend fun update(@Path("id") id: Int, @Body todo: String): Response<Todo>
-
-
 }

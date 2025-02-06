@@ -8,21 +8,21 @@ data class PhotoRemote (
     val title : String,
     val url: String,
     val thumbnailUrl: String
-    )
+)
 
-    fun PhotoRemote.toPhoto() =
-        Photo(
-            albumId = albumId,
-            id = id,
-            title = title,
-            url = url,
-            thumbnailUrl = thumbnailUrl
-        )
-    fun PhotoRemote.toPhotoDetail() =
-        Photo(
-            albumId = albumId,
-            id = id,
-            title = title,
-            url = url,
-            thumbnailUrl = thumbnailUrl
-        )
+fun PhotoRemote.toPhoto() =
+    Photo(
+        albumId = albumId,
+        id = id,
+        title = title,
+        url = url,
+        thumbnailUrl = thumbnailUrl
+    )
+fun PhotoRemote.toPhotoDetail() =
+    Photo(
+        albumId = albumId,
+        id = id,
+        title = title,
+        url = url,
+        thumbnailUrl = thumbnailUrl
+    )

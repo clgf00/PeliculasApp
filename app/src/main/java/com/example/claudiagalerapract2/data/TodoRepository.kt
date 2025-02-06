@@ -52,32 +52,6 @@ class TodoRepository @Inject constructor(
         }
     }
 
-    suspend fun updateTodo(id: Int, todo: String): NetworkResult<Todo> {
-        return try {
-            val response = todoService.update(id, todo)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    return NetworkResult.Success(it)
-                }
-            }
-            error("${response.code()} ${response.message()}")
-        } catch (e: Exception) {
-            error(e.message ?: e.toString())
-        }
-    }
-
-    suspend fun deleteTodo(id: Int): NetworkResult<Unit> {
-        return try {
-            val response = todoService.delete(id)
-            if (response.isSuccessful) {
-                return NetworkResult.Success(Unit)
-            }
-            error("${response.code()} ${response.message()}")
-        } catch (e: Exception) {
-            error(e.message ?: e.toString())
-        }
-    }
-
     private fun <T> error(message: String): NetworkResult<T> =
         NetworkResult.Error(message)
 

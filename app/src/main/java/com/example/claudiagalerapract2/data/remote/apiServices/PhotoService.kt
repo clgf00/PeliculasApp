@@ -21,4 +21,8 @@ interface PhotoService {
     @GET("/albums/{albumId}/photos")
     suspend fun getPhotosForAlbum(@Path("albumId") albumId: Int): Response<List<PhotoRemote>>
 
+
+    @DELETE("/photos/{id}")
+    suspend fun delete(@Path("id") key: Int): Response<Unit>
+
 }

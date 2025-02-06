@@ -4,5 +4,5 @@ import com.example.claudiagalerapract2.data.PhotoRepository
 import javax.inject.Inject
 
 class GetPhotos @Inject constructor(private val photoRepository: PhotoRepository) {
-    suspend operator fun invoke() = photoRepository.fetchPhotosConFlow()
+    suspend operator fun invoke() = photoRepository.fetchPhotos()
 }
